@@ -1,0 +1,103 @@
+{
+    "id": "61fbccae990af06532bd393f",
+    "name": "Agile Sprint Board",
+    "desc": "Move fast without losing sight by adopting an agile workflow that gives your team perspective during any project management situation.\n\n- Keep all code, specs, and plans easily accessible in one location for more organized product development.\n- Collaborate seamlessly with engineers, product and scrum masters.\n- Manage and prioritize the product backlog with stakeholders and product managers.\n- Easily share what’s shipped and what’s up next with stakeholders.\n\nCheck out our full Trello Engineering playbook [here](https://trello.com/teams/engineering).",
+    "descData": null,
+    "closed": false,
+    "idOrganization": "61fbc9e9d567197b752093c0",
+    "idEnterprise": null,
+    "pinned": false,
+    "url": "https://trello.com/b/avlnYUa4/agile-sprint-board",
+    "shortUrl": "https://trello.com/b/avlnYUa4",
+    "prefs": {
+        "permissionLevel": "org",
+        "hideVotes": false,
+        "voting": "disabled",
+        "comments": "members",
+        "invitations": "members",
+        "selfJoin": true,
+        "cardCovers": true,
+        "isTemplate": false,
+        "cardAging": "regular",
+        "calendarFeedEnabled": false,
+        "hiddenPluginBoardButtons": [
+            
+        ],
+        "background": "5a8486f9e66d693e925535ba",
+        "backgroundColor": null,
+        "backgroundImage": "https://trello-backgrounds.s3.amazonaws.com/SharedBackground/2560x1696/8d7bfae3eba22530e020656d46a4eb49/photo-1515079424831-8fce6574676d",
+        "backgroundImageScaled": [
+            {
+                "width": 140,
+                "height": 100,
+                "url": "https://trello-backgrounds.s3.amazonaws.com/SharedBackground/140x100/beb4b7c9e791a582289e60b36c681ba6/photo-1515079424831-8fce6574676d.jpg"
+            },
+            {
+                "width": 256,
+                "height": 192,
+                "url": "https://trello-backgrounds.s3.amazonaws.com/SharedBackground/256x192/04e1511fcf377846fe5e07f0e81832e7/photo-1515079424831-8fce6574676d.jpg"
+            },
+            {
+                "width": 480,
+                "height": 480,
+                "url": "https://trello-backgrounds.s3.amazonaws.com/SharedBackground/480x480/e8a76cd7622d8889d42c2977427bb584/photo-1515079424831-8fce6574676d.jpg"
+            },
+            {
+                "width": 960,
+                "height": 960,
+                "url": "https://trello-backgrounds.s3.amazonaws.com/SharedBackground/960x960/0a354a79bc21a1f831d079481f954b69/photo-1515079424831-8fce6574676d.jpg"
+            },
+            {
+                "width": 1024,
+                "height": 1024,
+                "url": "https://trello-backgrounds.s3.amazonaws.com/SharedBackground/1024x1024/a1ae987bb0cab9920e4ea381f7f4d304/photo-1515079424831-8fce6574676d.jpg"
+            },
+            {
+                "width": 1280,
+                "height": 1280,
+                "url": "https://trello-backgrounds.s3.amazonaws.com/SharedBackground/1280x1280/b37fa53943a2024f546e542a3ecc6fd9/photo-1515079424831-8fce6574676d.jpg"
+            },
+            {
+                "width": 1920,
+                "height": 1920,
+                "url": "https://trello-backgrounds.s3.amazonaws.com/SharedBackground/1920x1920/5652981e9a0a85d01ce679c466af765d/photo-1515079424831-8fce6574676d.jpg"
+            },
+            {
+                "width": 2048,
+                "height": 2048,
+                "url": "https://trello-backgrounds.s3.amazonaws.com/SharedBackground/2048x2048/e1ccb6f993e8f857437e7442bb000639/photo-1515079424831-8fce6574676d.jpg"
+            },
+            {
+                "width": 2560,
+                "height": 1600,
+                "url": "https://trello-backgrounds.s3.amazonaws.com/SharedBackground/2560x1600/b3cdf3bf1d56b49dc26fb7d3e6753bca/photo-1515079424831-8fce6574676d.jpg"
+            },
+            {
+                "width": 2560,
+                "height": 1696,
+                "url": "https://trello-backgrounds.s3.amazonaws.com/SharedBackground/2560x1696/8d7bfae3eba22530e020656d46a4eb49/photo-1515079424831-8fce6574676d"
+            }
+        ],
+        "backgroundTile": false,
+        "backgroundBrightness": "dark",
+        "backgroundBottomColor": "#102c45",
+        "backgroundTopColor": "#096c98",
+        "canBePublic": true,
+        "canBeEnterprise": true,
+        "canBeOrg": true,
+        "canBePrivate": true,
+        "canInvite": true
+    },
+    "labelNames": {
+        "green": "Meta",
+        "yellow": "Verified on branch",
+        "orange": "Bugs",
+        "red": "Blocked",
+        "purple": "Regression",
+        "blue": "Verified on staging",
+        "sky": "New Team / boards tab",
+        "lime": "",
+        "pink": "",
+        "black": "Security Issue"
+    }
+}

@@ -1,0 +1,13 @@
+Request method:	GET
+Request URI:	https://api.trello.com/1/boards/avlnYUa4?key=9d44432a6247b3a2c1e1288fc23a1865&token=eea9740497036be0be47ab7c03b5a9ed87a53993081ea6f534502d109f11d925
+Proxy:			<none>
+Request params:	<none>
+Query params:	key=9d44432a6247b3a2c1e1288fc23a1865
+				token=eea9740497036be0be47ab7c03b5a9ed87a53993081ea6f534502d109f11d925
+Form params:	<none>
+Path params:	<none>
+Headers:		Accept=*/*
+				Content-Type=application/json
+Cookies:		<none>
+Multiparts:		<none>
+Body:			<none>

@@ -22,8 +22,8 @@ public class BaseTest {
         BoardBO.updateBoard("SZxMHWd9");
     }
 
-//    @Test
-//    public void deleteBoardTest(){
-//        BoardBO.deleteBoard();
-//    }
+    @Test
+    public void deleteBoardTest(){
+        BoardBO.deleteBoard("X7QhOp0x");
+    }
 }

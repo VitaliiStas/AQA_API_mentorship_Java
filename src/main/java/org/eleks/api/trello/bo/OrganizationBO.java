@@ -1,2 +1,4 @@
-package org.eleks.api.trello.bo;public class OrganizationBO {
+package org.eleks.api.trello.bo;
+
+public class OrganizationBO {
 }

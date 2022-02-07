@@ -4,13 +4,13 @@ import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 
 @JsonIgnoreProperties(ignoreUnknown = true)
 public class GetBoardRequest {
-    private String boardId;
+    private String Id;
 
-    public String getBoardId() {
-        return boardId;
+    public String getId() {
+        return Id;
     }
 
-    public void setBoardId(String boardId) {
-        this.boardId = boardId;
+    public void setId(String id) {
+        Id = id;
     }
 }

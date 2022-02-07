@@ -1,6 +1,10 @@
 package org.eleks.api.trello.models.responses;
 
 //todo the same schema for GetBoard Response, maybe create general class for response?
+
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
+
+@JsonIgnoreProperties(ignoreUnknown = true)
 public class CreateBoardResponse {
 
     private String id;

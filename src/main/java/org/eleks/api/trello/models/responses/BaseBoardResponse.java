@@ -1,14 +1,13 @@
 package org.eleks.api.trello.models.responses;
 
-
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 
 @JsonIgnoreProperties(ignoreUnknown = true)
-public class GetBoardResponse {
+public class BaseBoardResponse {
     private String id;
     private String name;
     private String desc;
-    private String descData;
+//    private String descData;
     private String comments;
 
     public String getId() {
@@ -35,13 +34,13 @@ public class GetBoardResponse {
         this.desc = desc;
     }
 
-    public String getDescData() {
-        return descData;
-    }
+//    public String getDescData() {
+//        return descData;
+//    }
 
-    public void setDescData(String descData) {
-        this.descData = descData;
-    }
+//    public void setDescData(String descData) {
+//        this.descData = descData;
+//    }
 
     public String getComments() {
         return comments;

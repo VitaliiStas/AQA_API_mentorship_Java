@@ -1,16 +1,12 @@
-package org.eleks.api.trello.models.responses;
-
-//todo the same schema for GetBoard Response, maybe create general class for response?
+package org.eleks.api.trello.models.requests;
 
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 
 @JsonIgnoreProperties(ignoreUnknown = true)
-public class CreateBoardResponse {
-
+public class BaseBoardRequest {
     private String id;
     private String name;
     private String desc;
-    private String descData;
     private String comments;
 
     public String getId() {
@@ -37,14 +33,6 @@ public class CreateBoardResponse {
         this.desc = desc;
     }
 
-    public String getDescData() {
-        return descData;
-    }
-
-    public void setDescData(String descData) {
-        this.descData = descData;
-    }
-
     public String getComments() {
         return comments;
     }
@@ -53,4 +41,3 @@ public class CreateBoardResponse {
         this.comments = comments;
     }
 }
-

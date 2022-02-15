@@ -8,12 +8,11 @@ import static org.assertj.core.api.Assertions.assertThat;
 
 public class BoardHttpClient {
 
-
-    private static String boardId = "avlnYUa4";
+//    private static String boardId = "avlnYUa4";
     private static String defaultPath = "/boards/";
 
 
-    public static void updateBoard(String boardIdForUpdate) {
+    public void updateBoardRequest(String boardIdForUpdate) {
         //        todo create builder for object
         //todo move to the boardhttpclient.class
 
@@ -35,7 +34,7 @@ public class BoardHttpClient {
                 .isEqualTo(updateBoardResponse.getName());
     }
 
-    public static void deleteBoard(String boardIdForDelete) {
+    public DeleteBoardResponse deleteBoardRequest(String boardIdForDelete) {
 
         DeleteBoardResponse deleteBoardResponse = BaseHttpClient.createRequestSpecification()
                 //todo move to the boardhttpclient.class
@@ -47,13 +46,12 @@ public class BoardHttpClient {
 
         assertThat(deleteBoardResponse)
                 .isNotNull();
-
+        return deleteBoardResponse;
     }
 
-    public static void createBoard() {
+    public BaseBoardResponse createBoardRequest(String boardName) {
         BaseBoardRequest createBoardRequest = new BaseBoardRequest();
-        createBoardRequest.setName("TestBoardCreatedByAPI1");
-//
+        createBoardRequest.setName(boardName);
 
         BaseBoardResponse createBoardResponse = BaseHttpClient
                 .createRequestSpecification()
@@ -64,14 +62,16 @@ public class BoardHttpClient {
                 .extract()
                 .as(BaseBoardResponse.class);
 
-
+//check if the response isn't NULL and board name is correct
         assertThat(createBoardResponse)
                 .isNotNull()
                 .extracting(BaseBoardResponse::getName)
                 .isEqualTo(createBoardRequest.getName());
+
+        return createBoardResponse;
     }
 
-    public static void getBoardById() {
+    public BaseBoardResponse getBoardByIdRequest(String boardId) {
 //todo move to the boardhttpclient.class
         BaseBoardResponse getBoardResponse = BaseHttpClient.createRequestSpecification()
                 .get(defaultPath + boardId)
@@ -82,5 +82,6 @@ public class BoardHttpClient {
 
         assertThat(getBoardResponse)
                 .isNotNull();
+        return getBoardResponse;
     }
 }

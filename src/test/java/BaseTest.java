@@ -11,19 +11,19 @@ public class BaseTest {
 
     @Test
     public void getBoardByIdTest(){
-        BoardBO.getBoardById();
+        BoardBO.getBoardByIdAndCheckResponseAndDelete();
     }
-    @Test
-    public void createBoardTest(){
-        BoardBO.createBoardAndCheckName();
-    }
-    @Test
-    public void updateBoardTest(){
-        BoardBO.updateBoard("SZxMHWd9");
-    }
+//    @Test
+//    public void createBoardTest(){
+//        BoardBO.createBoardAndCheckName();
+//    }
+//    @Test
+//    public void updateBoardTest(){
+//        BoardBO.updateBoard("SZxMHWd9");
+//    }
 
     @Test
     public void deleteBoardTest(){
-        BoardBO.deleteBoard("X7QhOp0x");
+        BoardBO.deleteBoardAndCheckResponse();
     }
 }

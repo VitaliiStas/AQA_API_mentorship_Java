@@ -1,6 +1,5 @@
 package org.eleks.api.trello.http_clients;
 
-import org.apache.commons.lang3.RandomStringUtils;
 import org.eleks.api.trello.models.requests.BaseBoardRequest;
 import org.eleks.api.trello.models.responses.*;
 
@@ -8,28 +7,27 @@ import static org.assertj.core.api.Assertions.assertThat;
 
 public class BoardHttpClient {
 
-//    private static String boardId = "avlnYUa4";
+    //    private static String boardId = "avlnYUa4";
     private static final String PATH = "/boards/";
 
+    //    todo return the changes
 
-    public void updateBoardRequest(String boardIdForUpdate) {
-        //        todo create builder for object
 
-        BaseBoardRequest updateBoardRequest = new BaseBoardRequest();
-        updateBoardRequest.setName(RandomStringUtils.randomAlphabetic(10));
-        updateBoardRequest.setDesc(RandomStringUtils.randomAlphabetic(10));
+    public BaseBoardResponse updateBoard(String boardIdForUpdate, BaseBoardRequest requestBody) {
+
         BaseBoardResponse updateBoardResponse = BaseHttpClient
                 .createRequestSpecification()
-                .body(updateBoardRequest)
+                .body(requestBody)
                 .put(PATH + boardIdForUpdate)
-                .then().log().all()
+                .then()
                 .extract()
                 .as(BaseBoardResponse.class);
-
-        assertThat(updateBoardRequest)
-                .isNotNull()
-                .extracting(BaseBoardRequest::getName)
-                .isEqualTo(updateBoardResponse.getName());
+        return updateBoardResponse;
+// todo move
+//        assertThat(updateBoardResponse)
+//                .isNotNull()
+//                .extracting(BaseBoardResponse::getName)
+//                .isEqualTo(requestBody.getName());
     }
 
     public DeleteBoardResponse deleteBoardRequest(String boardIdForDelete) {
@@ -40,9 +38,6 @@ public class BoardHttpClient {
                 .log()
                 .all()
                 .statusCode(200).extract().as(DeleteBoardResponse.class);
-
-        assertThat(deleteBoardResponse)
-                .isNotNull();
         return deleteBoardResponse;
     }
 
@@ -59,12 +54,6 @@ public class BoardHttpClient {
                 .extract()
                 .as(BaseBoardResponse.class);
 
-//check if the response isn't NULL and board name is correct
-        assertThat(createBoardResponse)
-                .isNotNull()
-                .extracting(BaseBoardResponse::getName)
-                .isEqualTo(createBoardRequest.getName());
-
         return createBoardResponse;
     }
 
@@ -72,12 +61,9 @@ public class BoardHttpClient {
         BaseBoardResponse getBoardResponse = BaseHttpClient.createRequestSpecification()
                 .get(PATH + boardId)
                 .then()
-                .statusCode(200)
                 .extract()
                 .as(BaseBoardResponse.class);
 
-        assertThat(getBoardResponse)
-                .isNotNull();
         return getBoardResponse;
     }
 }

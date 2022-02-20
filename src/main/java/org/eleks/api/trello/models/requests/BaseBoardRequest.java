@@ -1,13 +1,19 @@
 package org.eleks.api.trello.models.requests;
 
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
+import org.eleks.api.trello.models.requests.board_request_nested_objects.Prefs;
 
 @JsonIgnoreProperties(ignoreUnknown = true)
 public class BaseBoardRequest {
-    private String id;
-    private String name;
-    private String desc;
-    private String comments;
+    protected String id;
+    protected String name;
+    protected String desc;
+    protected Prefs prefs;
+
+    public Prefs getPrefs() {
+        return prefs;
+    }
+
 
     public String getId() {
         return id;
@@ -33,11 +39,10 @@ public class BaseBoardRequest {
         this.desc = desc;
     }
 
-    public String getComments() {
-        return comments;
-    }
 
-    public void setComments(String comments) {
-        this.comments = comments;
+    public void setPrefs(Prefs prefs) {
+        this.prefs = prefs;
     }
 }
+
+

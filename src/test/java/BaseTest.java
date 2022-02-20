@@ -1,5 +1,6 @@
 
 import org.eleks.api.trello.bo.BoardBO;
+import org.eleks.api.trello.bo.BoardBO2;
 import org.eleks.api.trello.listeners.LogListener;
 import org.testng.annotations.Listeners;
 import org.testng.annotations.Test;
@@ -17,13 +18,31 @@ public class BaseTest {
 //    public void createBoardTest(){
 //        BoardBO.createBoardAndCheckName();
 //    }
-//    @Test
-//    public void updateBoardTest(){
-//        BoardBO.updateBoard("SZxMHWd9");
-//    }
+    @Test
+    public void updateBoardTest(){
+        BoardBO.updateBoardAndCheckResponseAndDelete();
+    }
 
     @Test
     public void deleteBoardTest(){
         BoardBO.deleteBoardAndCheckResponse();
     }
+
+
+
+    @Test
+    public void deleteBoardTestBO2(){
+        BoardBO2
+                .createBoard2()
+                .deleteBoardAndCheckResponse2();
+    }
+    @Test
+    public void updateBoardTestBO2(){
+        BoardBO2
+                .createBoard2()
+                .updateBoardAndCheckResponseBO2()
+                .deleteBoardAndCheckResponse2();
+    }
+
+
 }

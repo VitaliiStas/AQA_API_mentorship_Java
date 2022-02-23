@@ -1,6 +1,7 @@
 package org.eleks.api.trello.models.requests;
 
 import org.apache.commons.lang3.RandomStringUtils;
+import org.eleks.api.trello.models.requests.board_request_nested_objects.LabelNames;
 import org.eleks.api.trello.models.requests.board_request_nested_objects.Prefs;
 
 public class BoardBodyBuilder {
@@ -36,6 +37,10 @@ public class BoardBodyBuilder {
 
     public BoardBodyBuilder setPrefs(Prefs prefs) {
         updateBoardRequest.prefs = prefs;
+        return this;
+    }
+    public BoardBodyBuilder setLabelNames(LabelNames labelNames) {
+        updateBoardRequest.labelNames = labelNames;
         return this;
     }
 

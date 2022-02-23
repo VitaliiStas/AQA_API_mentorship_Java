@@ -49,7 +49,6 @@ public class BoardBO {
                 .deleteBoardRequest(boardBO.createBoard().getId())
                 .get_value(), new DeleteBoardResponse()
                 .get_value(), "Response mismatch");
-
     }
 
 

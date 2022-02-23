@@ -1,6 +1,7 @@
 package org.eleks.api.trello.models.responses;
 
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
+import org.eleks.api.trello.models.requests.board_request_nested_objects.LabelNames;
 import org.eleks.api.trello.models.requests.board_request_nested_objects.Prefs;
 
 @JsonIgnoreProperties(ignoreUnknown = true)
@@ -9,7 +10,15 @@ public class BaseBoardResponse {
     private String name;
     private String desc;
     private Prefs prefs;
+    protected LabelNames labelNames;
 
+    public LabelNames getLabelNames() {
+        return labelNames;
+    }
+
+    public void setLabelNames(LabelNames labelNames) {
+        this.labelNames = labelNames;
+    }
 
     public String getId() {
         return id;

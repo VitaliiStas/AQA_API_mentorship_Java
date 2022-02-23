@@ -10,8 +10,6 @@ public class BoardHttpClient {
     //    private static String boardId = "avlnYUa4";
     private static final String PATH = "/boards/";
 
-    //    todo return the changes
-
 
     public BaseBoardResponse updateBoard(String boardIdForUpdate, BaseBoardRequest requestBody) {
 
@@ -20,14 +18,11 @@ public class BoardHttpClient {
                 .body(requestBody)
                 .put(PATH + boardIdForUpdate)
                 .then()
+                .log()
+                .all()
                 .extract()
                 .as(BaseBoardResponse.class);
         return updateBoardResponse;
-// todo move
-//        assertThat(updateBoardResponse)
-//                .isNotNull()
-//                .extracting(BaseBoardResponse::getName)
-//                .isEqualTo(requestBody.getName());
     }
 
     public DeleteBoardResponse deleteBoardRequest(String boardIdForDelete) {
@@ -51,6 +46,8 @@ public class BoardHttpClient {
                 .basePath(PATH)
                 .post()
                 .then()
+                .log()
+                .all()
                 .extract()
                 .as(BaseBoardResponse.class);
 
@@ -61,6 +58,8 @@ public class BoardHttpClient {
         BaseBoardResponse getBoardResponse = BaseHttpClient.createRequestSpecification()
                 .get(PATH + boardId)
                 .then()
+                .log()
+                .all()
                 .extract()
                 .as(BaseBoardResponse.class);
 

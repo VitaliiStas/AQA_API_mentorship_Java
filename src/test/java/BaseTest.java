@@ -33,15 +33,23 @@ public class BaseTest {
     @Test
     public void deleteBoardTestBO2(){
         BoardBO2
-                .createBoard2()
-                .deleteBoardAndCheckResponse2();
+                .createBoardBO2()
+                .deleteBoardAndCheckResponseBO2();
     }
     @Test
     public void updateBoardTestBO2(){
         BoardBO2
-                .createBoard2()
+                .createBoardBO2()
                 .updateBoardAndCheckResponseBO2()
-                .deleteBoardAndCheckResponse2();
+                .deleteBoardAndCheckResponseBO2();
+    }
+
+    @Test
+    public void getBoardByIdTestBO2(){
+        BoardBO2
+                .createBoardBO2()
+                .getBoardByIdAndCheckResponseBO2()
+                .deleteBoardAndCheckResponseBO2();
     }
 
 

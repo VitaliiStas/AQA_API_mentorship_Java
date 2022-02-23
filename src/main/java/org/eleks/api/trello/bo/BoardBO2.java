@@ -1,8 +1,6 @@
 package org.eleks.api.trello.bo;
 
 import org.apache.commons.lang3.RandomStringUtils;
-import org.assertj.core.api.Assertions;
-import org.assertj.core.api.recursive.comparison.RecursiveComparisonConfiguration;
 import org.eleks.api.trello.models.requests.BaseBoardRequest;
 import org.eleks.api.trello.models.requests.BoardBodyBuilder;
 import org.eleks.api.trello.models.responses.BaseBoardResponse;
@@ -12,33 +10,31 @@ import org.testng.Assert;
 import static org.assertj.core.api.Assertions.assertThat;
 
 public class BoardBO2 extends BoardBO {
-    private static String boardID;
 
-    public void setBoardID(String boardID) {
-        this.boardID = boardID;
+    private static BaseBoardResponse createResponse;
+
+
+    public static void setCreateResponse(BaseBoardResponse createResponse) {
+        BoardBO2.createResponse = createResponse;
     }
-//    public static void getBoardByIdAndCheckResponseAndDelete() {
-//        BaseBoardRequest baseBoardRequest = new BoardBodyBuilder().build();
-//        boardHttpClient.getBoardByIdRequest(baseBoardResponse.getId()))
-//
-//
-//        //delete created board
-//        boardHttpClient.deleteBoardRequest(baseBoardResponse.getId());
-//
-//        Assertions.assertThat(baseBoardResponse)
-//                .isNotNull()
-//                .usingRecursiveComparison()
-//                .isEqualTo(baseBoardRequest);
-//
-//    }
+
+
+
+    public static BoardBO2 getBoardByIdAndCheckResponseBO2() {
+        BaseBoardResponse baseBoardResponse = boardHttpClient.getBoardByIdRequest(createResponse.getId());
+
+        assertThat(baseBoardResponse).isNotNull()
+                .usingRecursiveComparison().ignoringFields("id","prefs")
+                .isEqualTo(createResponse);
+
+        return new BoardBO2();
+    }
 
 
     public static BoardBO2 updateBoardAndCheckResponseBO2() {
         BaseBoardRequest baseBoardRequest = new BoardBodyBuilder().build();
-        BaseBoardResponse baseBoardResponse =
-        boardHttpClient.updateBoard(
-                boardID, baseBoardRequest);
-
+        BaseBoardResponse baseBoardResponse = boardHttpClient.updateBoard(
+                createResponse.getId(), baseBoardRequest);
 
         assertThat(baseBoardResponse).isNotNull()
                 .usingRecursiveComparison().ignoringFields("id","prefs")
@@ -48,18 +44,18 @@ public class BoardBO2 extends BoardBO {
 
     }
 
-    public static void deleteBoardAndCheckResponse2() {
+    public static void deleteBoardAndCheckResponseBO2() {
         Assert.assertEquals(boardHttpClient
-                .deleteBoardRequest(boardID)
+                .deleteBoardRequest(createResponse.getId())
                 .get_value(), new DeleteBoardResponse()
                 .get_value(), "Response mismatch");
 
     }
 
-    public static BoardBO2 createBoard2() {
+    public static BoardBO2 createBoardBO2() {
         BaseBoardResponse baseBoardResponse = boardHttpClient
                 .createBoardRequest("Board" + RandomStringUtils.randomAlphabetic(10));
-        new BoardBO2().setBoardID(baseBoardResponse.getId());
+        setCreateResponse(baseBoardResponse);
         return new BoardBO2();
     }
 }

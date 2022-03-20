@@ -1,16 +1,18 @@
 package org.eleks.api.trello.http_clients;
 
+import io.qameta.allure.Step;
 import org.eleks.api.trello.models.requests.BaseBoardRequest;
 import org.eleks.api.trello.models.responses.*;
 
-import static org.assertj.core.api.Assertions.assertThat;
 
 public class BoardHttpClient {
 
     //    private static String boardId = "avlnYUa4";
-    private static final String PATH = "/boards/";
+    protected static final String PATH = "/boards/";
 
 
+
+    @Step("Send update board request/POST")
     public BaseBoardResponse updateBoard(String boardIdForUpdate, BaseBoardRequest requestBody) {
 
         BaseBoardResponse updateBoardResponse = BaseHttpClient
@@ -18,16 +20,18 @@ public class BoardHttpClient {
                 .body(requestBody)
                 .put(PATH + boardIdForUpdate)
                 .then()
-                .log()
-                .all()
+//                .log()
+//                .all()
                 .extract()
                 .as(BaseBoardResponse.class);
         return updateBoardResponse;
     }
 
+    @Step("Send delete board request/DELETE")
     public DeleteBoardResponse deleteBoardRequest(String boardIdForDelete) {
 
-        DeleteBoardResponse deleteBoardResponse = BaseHttpClient.createRequestSpecification()
+        DeleteBoardResponse deleteBoardResponse = BaseHttpClient
+                .createRequestSpecification()
                 .delete(PATH + boardIdForDelete)
                 .then()
                 .log()
@@ -36,6 +40,7 @@ public class BoardHttpClient {
         return deleteBoardResponse;
     }
 
+    @Step("Send create board request/POST")
     public BaseBoardResponse createBoardRequest(String boardName) {
         BaseBoardRequest createBoardRequest = new BaseBoardRequest();
         createBoardRequest.setName(boardName);
@@ -46,23 +51,25 @@ public class BoardHttpClient {
                 .basePath(PATH)
                 .post()
                 .then()
-                .log()
-                .all()
+//                .log()
+//                .all()
                 .extract()
                 .as(BaseBoardResponse.class);
 
         return createBoardResponse;
     }
 
+    @Step("Send get board request/GET")
     public BaseBoardResponse getBoardByIdRequest(String boardId) {
-        BaseBoardResponse getBoardResponse = BaseHttpClient.createRequestSpecification()
+//        BaseBoardResponse getBoardResponse = BaseHttpClient.createRequestSpecification()
+        return BaseHttpClient.createRequestSpecification()
                 .get(PATH + boardId)
                 .then()
-                .log()
-                .all()
+//                .log()
+//                .all()
                 .extract()
                 .as(BaseBoardResponse.class);
 
-        return getBoardResponse;
+//        return getBoardResponse;
     }
 }

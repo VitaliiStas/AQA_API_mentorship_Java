@@ -6,11 +6,17 @@ import org.eleks.api.trello.models.requests.board_request_nested_objects.Prefs;
 
 @JsonIgnoreProperties(ignoreUnknown = true)
 public class BaseBoardResponse {
+    private String color;
+
     private String id;
     private String name;
     private String desc;
     private Prefs prefs;
     protected LabelNames labelNames;
+
+    public String getColor() {
+        return color;
+    }
 
     public LabelNames getLabelNames() {
         return labelNames;
@@ -51,4 +57,6 @@ public class BaseBoardResponse {
     public void setPrefs(Prefs prefs) {
         this.prefs = prefs;
     }
+
+
 }

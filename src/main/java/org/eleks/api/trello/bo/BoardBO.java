@@ -38,7 +38,7 @@ public class BoardBO {
                                 .getBoardByIdRequest(baseBoardResponse.getId()))
                 , jsonUtils
                         .convertObjectToJSON(baseBoardResponse)
-                , "Get Board by ID Response mismatch");
+                , "Get Board by ID ListResponse mismatch");
         //delete created board
         boardHttpClient.deleteBoardRequest(baseBoardResponse.getId());
 
@@ -48,7 +48,7 @@ public class BoardBO {
         Assert.assertEquals(boardHttpClient
                 .deleteBoardRequest(boardBO.createBoard().getId())
                 .get_value(), new DeleteBoardResponse()
-                .get_value(), "Response mismatch");
+                .get_value(), "ListResponse mismatch");
     }
 
 

@@ -65,8 +65,8 @@ public class BoardHttpClient {
         return BaseHttpClient.createRequestSpecification()
                 .get(PATH + boardId)
                 .then()
-//                .log()
-//                .all()
+                .log()
+                .all()
                 .extract()
                 .as(BaseBoardResponse.class);
 

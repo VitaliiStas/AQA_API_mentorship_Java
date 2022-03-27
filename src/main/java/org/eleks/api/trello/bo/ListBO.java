@@ -2,25 +2,28 @@ package org.eleks.api.trello.bo;
 
 import io.qameta.allure.Step;
 import org.apache.commons.lang3.RandomStringUtils;
-import org.eleks.api.trello.models.requests.BaseBoardRequest;
-import org.eleks.api.trello.models.requests.BoardBodyBuilder;
 import org.eleks.api.trello.models.requests.ListHttpClient;
 import org.eleks.api.trello.models.requests.ListRequest;
-import org.eleks.api.trello.models.requests.board_request_nested_objects.LabelNames;
-import org.eleks.api.trello.models.responses.BaseBoardResponse;
 import org.eleks.api.trello.models.responses.Lists.ListResponse;
 
 import static org.assertj.core.api.Assertions.assertThat;
 
 public class ListBO {
-    public static BoardBO2 boardBO = new BoardBO2();
-    private static ListBO listBO = new ListBO();
-    private static ListHttpClient listHttpClient = new ListHttpClient();
+    //    todo fix all static to non-static
+    public BoardBO2 boardBO = new BoardBO2();
+    private ListHttpClient listHttpClient = new ListHttpClient();
+    private String boardID;
     private static ListResponse baseListResponse;
 
+    private ListBO() {
+    }
 
+    //todo create constructor for board id
+    public ListBO(String boardID) {
+        this.boardID = boardID;
+    }
 
-    /*
+/*
     delete
     {
     "id": "6237386f8a579729e29d51e6",
@@ -34,7 +37,7 @@ public class ListBO {
 
 
     @Step("Update List")
-    public static ListBO updateListAndCheckResponseBO() {
+    public ListBO updateListAndCheckResponseBO() {
         ListRequest listRequest = new ListRequest();
         listRequest.setName("Updated Name");
         listRequest.setPos(123456789);
@@ -43,7 +46,7 @@ public class ListBO {
         return new ListBO();
     }
 
-    public static ListBO closeListAndCheckResponseBO() {
+    public ListBO closeListAndCheckResponseBO() {
         ListRequest listResponse = new ListRequest();
         listResponse.setName("Updated Name");
         listResponse.setPos(8192);
@@ -54,8 +57,8 @@ public class ListBO {
     }
 
 
-    public static ListBO createListAndCheckResponseBO() {
-        listBO.createList();
+    public ListBO createListAndCheckResponseBO() {
+        createList(boardID);
 
         assertThat(baseListResponse)
                 .isNotNull()
@@ -66,9 +69,9 @@ public class ListBO {
     }
 
     //todo updateList
-    private static ListRequest updateList(String id, ListRequest requestBody) {
+    private ListRequest updateList(String id, ListRequest requestBody) {
 
-       ListRequest request = listHttpClient.updateListRequest(id, requestBody);
+        ListRequest request = listHttpClient.updateListRequest(id, requestBody);
         assertThat(request)
                 .isNotNull()
                 .usingRecursiveComparison()
@@ -79,33 +82,37 @@ public class ListBO {
     }
 
 
-    private static void setBaseListResponse(ListResponse baseListResponse) {
-        ListBO.baseListResponse = baseListResponse;
+    private  void setBaseListResponse(ListResponse baseListResponse) {
+        this.baseListResponse = baseListResponse;
     }
 
-    private static ListResponse getList() {
+    private ListResponse getList() {
         return getListById(baseListResponse.getId());
     }
 
     @Step("Get List by ID")
-    private static ListResponse getListById(String iD) {
+    private ListResponse getListById(String iD) {
         return listHttpClient.getListRequest(iD);
     }
 
     @Step("Create List")
-    private ListResponse createList() {
-        ListResponse listResponse = listHttpClient
+    private ListResponse createList(String boardID) {
+        ListResponse listResponse = baseListResponse = listHttpClient
                 .createListRequest("Test_List" + RandomStringUtils.randomAlphabetic(10) + "Test_List"
-                        , BoardBO2.getCreateResponse().getId());
-        listBO.setBaseListResponse(listResponse);
+                        , boardID);
+
+        setBaseListResponse(listResponse);
         return listResponse;
     }
 
-    private void createLists(int num) {
+    private void createLists(String boardID, int num) {
         for (int i = 0; i < num; i++) {
-            createList();
+            createList(boardID);
         }
     }
+
+
+
 
 
 }

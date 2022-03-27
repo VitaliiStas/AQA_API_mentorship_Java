@@ -1,5 +1,5 @@
-import org.eleks.api.trello.bo.BoardBO;
 import org.eleks.api.trello.bo.BoardBO2;
+import org.eleks.api.trello.bo.ListBO;
 import org.eleks.api.trello.listeners.LogListener;
 import org.testng.annotations.Listeners;
 import org.testng.annotations.Test;
@@ -7,27 +7,6 @@ import org.testng.annotations.Test;
 
 @Listeners(LogListener.class)
 public class BaseTest {
-
-
-    @Test
-    public void getBoardByIdTest() {
-        BoardBO.getBoardByIdAndCheckResponseAndDelete();
-    }
-
-    //    @Test
-//    public void createBoardTest(){
-//        BoardBO.createBoardAndCheckName();
-//    }
-    @Test
-    public void updateBoardTest() {
-        BoardBO.updateBoardAndCheckResponseAndDelete();
-    }
-
-    @Test
-    public void deleteBoardTest() {
-        BoardBO.deleteBoardAndCheckResponse();
-    }
-
 
     @Test
     public void deleteBoardTestBO2() {
@@ -65,7 +44,8 @@ public class BaseTest {
     public void createListOnBoardAndCheckResponseTestBO2() {
         BoardBO2
                 .createBoardBO2()
-                .listBO.createListAndCheckResponseBO()
+                .initListBO()
+                .createListAndCheckResponseBO()
                 .boardBO.deleteBoardAndCheckResponseBO2()
         ;
     }
@@ -73,7 +53,9 @@ public class BaseTest {
     public void updateListOnBoardAndCheckResponseTestBO2() {
         BoardBO2
                 .createBoardBO2()
-                .listBO.createListAndCheckResponseBO()
+//                todo use initListBO
+                .initListBO()
+                .createListAndCheckResponseBO()
                 .updateListAndCheckResponseBO()
                 .boardBO.deleteBoardAndCheckResponseBO2()
         ;
@@ -82,7 +64,8 @@ public class BaseTest {
     public void closeListOnBoardAndCheckResponseTestBO2() {
         BoardBO2
                 .createBoardBO2()
-                .listBO.createListAndCheckResponseBO()
+                .initListBO()
+                .createListAndCheckResponseBO()
                 .updateListAndCheckResponseBO()
                 .closeListAndCheckResponseBO()
                 .boardBO.deleteBoardAndCheckResponseBO2()

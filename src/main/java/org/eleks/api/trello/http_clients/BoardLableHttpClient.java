@@ -13,8 +13,8 @@ public class BoardLableHttpClient extends BoardHttpClient{
                 .queryParams("name",name,"color",color)
                 .post()
                 .then()
-//                .log()
-//                .all()
+                .log()
+                .all()
                 .extract()
                 .as(BaseBoardResponse.class);
         return createLabelResponse;

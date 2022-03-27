@@ -21,8 +21,8 @@ public class ListHttpClient extends BaseHttpClient {
                 .queryParam("idBoard", idBoard)
                 .post()
                 .then()
-                .log()
-                .all()
+//                .log()
+//                .all()
                 .extract()
                 .as(ListResponse.class);
         return createListResponse;
@@ -32,8 +32,8 @@ public class ListHttpClient extends BaseHttpClient {
         return BaseHttpClient.createRequestSpecification()
                 .get(PATH + idList)
                 .then()
-//                .log()
-//                .all()
+                .log()
+                .all()
                 .extract()
                 .as(ListResponse.class);
     }

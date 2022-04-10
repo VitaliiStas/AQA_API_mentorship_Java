@@ -1,29 +1,20 @@
-
-import org.eleks.api.trello.bo.BoardBO;
+import io.qameta.allure.Step;
+import org.eleks.api.trello.bo.BoardBO2;
+import org.eleks.api.trello.http_clients.BoardHttpClient;
 import org.eleks.api.trello.listeners.LogListener;
+import org.testng.annotations.AfterMethod;
 import org.testng.annotations.Listeners;
-import org.testng.annotations.Test;
 
 
 @Listeners(LogListener.class)
-public class BaseTest {
-
-
-    @Test
-    public void getBoardByIdTest(){
-        BoardBO.getBoardById();
-    }
-    @Test
-    public void createBoardTest(){
-        BoardBO.createBoardAndCheckName();
-    }
-    @Test
-    public void updateBoardTest(){
-        BoardBO.updateBoard("SZxMHWd9");
+public class BaseTest{
+    @AfterMethod
+    @Step("Close the browser")
+    public void deleteBoard() {
+       new BoardHttpClient()
+               .deleteBoardRequest(BoardBO2.getCreateBoardResponse().getId());
     }
 
-    @Test
-    public void deleteBoardTest(){
-        BoardBO.deleteBoard("X7QhOp0x");
-    }
+
+
 }

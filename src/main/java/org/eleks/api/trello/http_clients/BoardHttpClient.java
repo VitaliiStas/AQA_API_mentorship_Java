@@ -1,86 +1,76 @@
 package org.eleks.api.trello.http_clients;
 
-import org.apache.commons.lang3.RandomStringUtils;
+import io.qameta.allure.Step;
 import org.eleks.api.trello.models.requests.BaseBoardRequest;
 import org.eleks.api.trello.models.responses.*;
 
-import static org.assertj.core.api.Assertions.assertThat;
 
 public class BoardHttpClient {
 
+    //    private static String boardId = "avlnYUa4";
+    protected static final String PATH = "/boards/";
 
-    private static String boardId = "avlnYUa4";
-    private static String defaultPath = "/boards/";
 
 
-    public static void updateBoard(String boardIdForUpdate) {
-        //        todo create builder for object
-        //todo move to the boardhttpclient.class
+    @Step("Send update board request/POST")
+    public BaseBoardResponse updateBoard(String boardIdForUpdate, BaseBoardRequest requestBody) {
 
-        BaseBoardRequest updateBoardRequest = new BaseBoardRequest();
-        updateBoardRequest.setName(RandomStringUtils.randomAlphabetic(10));
-        updateBoardRequest.setDesc(RandomStringUtils.randomAlphabetic(10));
-//todo move to the boardhttpclient.class
         BaseBoardResponse updateBoardResponse = BaseHttpClient
                 .createRequestSpecification()
-                .body(updateBoardRequest)
-                .put(defaultPath + boardIdForUpdate)
-                .then().log().all()
+                .body(requestBody)
+                .put(PATH + boardIdForUpdate)
+                .then()
+//                .log()
+//                .all()
                 .extract()
                 .as(BaseBoardResponse.class);
-
-        assertThat(updateBoardRequest)
-                .isNotNull()
-                .extracting(BaseBoardRequest::getName)
-                .isEqualTo(updateBoardResponse.getName());
+        return updateBoardResponse;
     }
 
-    public static void deleteBoard(String boardIdForDelete) {
+    @Step("Send delete board request/DELETE")
+    public DeleteBoardResponse deleteBoardRequest(String boardIdForDelete) {
 
-        DeleteBoardResponse deleteBoardResponse = BaseHttpClient.createRequestSpecification()
-                //todo move to the boardhttpclient.class
-                .delete(defaultPath + boardIdForDelete)
+//        DeleteBoardResponse deleteBoardResponse = BaseHttpClient
+        return BaseHttpClient
+                .createRequestSpecification()
+                .delete(PATH + boardIdForDelete)
                 .then()
                 .log()
                 .all()
                 .statusCode(200).extract().as(DeleteBoardResponse.class);
-
-        assertThat(deleteBoardResponse)
-                .isNotNull();
-
+//        return deleteBoardResponse;
     }
 
-    public static void createBoard() {
+    @Step("Send create board request/POST")
+    public BaseBoardResponse createBoardRequest(String boardName) {
         BaseBoardRequest createBoardRequest = new BaseBoardRequest();
-        createBoardRequest.setName("TestBoardCreatedByAPI1");
-//
+        createBoardRequest.setName(boardName);
 
         BaseBoardResponse createBoardResponse = BaseHttpClient
                 .createRequestSpecification()
                 .body(createBoardRequest)
-                .basePath(defaultPath)
+                .basePath(PATH)
                 .post()
                 .then()
+//                .log()
+//                .all()
                 .extract()
                 .as(BaseBoardResponse.class);
 
-
-        assertThat(createBoardResponse)
-                .isNotNull()
-                .extracting(BaseBoardResponse::getName)
-                .isEqualTo(createBoardRequest.getName());
+        return createBoardResponse;
     }
 
-    public static void getBoardById() {
-//todo move to the boardhttpclient.class
-        BaseBoardResponse getBoardResponse = BaseHttpClient.createRequestSpecification()
-                .get(defaultPath + boardId)
+    @Step("Send get board request/GET")
+    public BaseBoardResponse getBoardByIdRequest(String boardId) {
+//        BaseBoardResponse getBoardResponse = BaseHttpClient.createRequestSpecification()
+        return BaseHttpClient.createRequestSpecification()
+                .get(PATH + boardId)
                 .then()
-                .statusCode(200)
+                .log()
+                .all()
                 .extract()
                 .as(BaseBoardResponse.class);
 
-        assertThat(getBoardResponse)
-                .isNotNull();
+//        return getBoardResponse;
     }
 }

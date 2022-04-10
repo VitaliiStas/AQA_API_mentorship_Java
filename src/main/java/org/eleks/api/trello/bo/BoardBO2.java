@@ -1,6 +1,5 @@
 package org.eleks.api.trello.bo;
 
-import com.fasterxml.jackson.databind.ObjectMapper;
 import io.qameta.allure.Step;
 import org.apache.commons.lang3.RandomStringUtils;
 import org.eleks.api.trello.http_clients.BoardHttpClient;
@@ -12,34 +11,34 @@ import org.eleks.api.trello.models.responses.BaseBoardResponse;
 import org.eleks.api.trello.models.responses.DeleteBoardResponse;
 import org.testng.Assert;
 
-import java.io.IOException;
 import java.util.Arrays;
-import java.util.HashMap;
 import java.util.List;
-import java.util.Map;
 
 import static org.assertj.core.api.Assertions.assertThat;
 
 public class BoardBO2 {
-//todo why it doesn't work with non-static field?????
-    private static BaseBoardResponse createResponse;
+    //todo static createResponse2 should be wrapped in thread local, it should be set in the default constructor BoardBO2
+//    private BaseBoardResponse createResponse;
+    private static ThreadLocal<BaseBoardResponse> createBoardResponse = new ThreadLocal<>();
     private static BoardHttpClient boardHttpClient = new BoardHttpClient();
 
     private static List<String> colors =
             Arrays.asList("blue", "black", "red", "green", "purple", "orange", "yellow");
 
 
+    //todo new method initListBO(){
 
-//todo new method initListBO(){
-
-    public ListBO initListBO(){
-         return new  ListBO(createResponse.getId());
+    public ListBO initListBO() {
+        return new ListBO(getCreateBoardResponse().getId());
     }
+//        return new ListBO(createResponse.getId());
+//    }
 
 
     //    todo how to compare two diff JSON?? or how to create map from
     public BoardBO2 createLabelOnBoardAndCheckResponseBO2() {
-        String boardID = createResponse.getId();
+//        String boardID = createResponse.getId();
+        String boardID = getCreateBoardResponse().getId();
         BaseBoardResponse labelNames = addBoardLabel(boardID, "LabelName", colors.get(1));
 //        boardHttpClient.getBoardByIdRequest(boardID).getLabelNames();
 
@@ -79,12 +78,14 @@ public class BoardBO2 {
     @Step("Get board by ID")
     public BoardBO2 getBoardByIdAndCheckResponseBO2() {
         BaseBoardResponse baseBoardResponse = boardHttpClient.getBoardByIdRequest(
-                createResponse.getId());
+                getCreateBoardResponse().getId());
+//                createResponse.getId());
 
         assertThat(baseBoardResponse)
                 .isNotNull()
                 .usingRecursiveComparison()
-                .isEqualTo(createResponse);
+                .isEqualTo(getCreateBoardResponse());
+//                .isEqualTo(createResponse);
 
         return new BoardBO2();
     }
@@ -101,12 +102,15 @@ public class BoardBO2 {
                 .build();
 
         BaseBoardResponse baseBoardResponse = boardHttpClient.updateBoard(
-                createResponse.getId(), baseBoardRequest);
+                getCreateBoardResponse().getId(), baseBoardRequest);
+//                createResponse.getId(), baseBoardRequest);
 
-        assertThat(baseBoardResponse).isNotNull()
+        assertThat(baseBoardResponse)
+                .isNotNull()
                 .usingRecursiveComparison()
                 .ignoringFields("id", "prefs", "labelNames")
-                .isEqualTo(baseBoardRequest);
+                .isEqualTo(boardHttpClient.getBoardByIdRequest(getCreateBoardResponse().getId()));
+//                .isEqualTo(boardHttpClient.getBoardByIdRequest(createResponse.getId()));
 
         return new BoardBO2();
 
@@ -115,7 +119,8 @@ public class BoardBO2 {
     @Step("Delete created/updated board")
     public void deleteBoardAndCheckResponseBO2() {
         Assert.assertEquals(boardHttpClient
-                .deleteBoardRequest(createResponse.getId())
+                .deleteBoardRequest(getCreateBoardResponse().getId())
+//                .deleteBoardRequest(createResponse.getId())
                 .get_value(), new DeleteBoardResponse()
                 .get_value(), "ListResponse mismatch");
 
@@ -126,17 +131,28 @@ public class BoardBO2 {
     public static BoardBO2 createBoardBO2() {
         BaseBoardResponse baseBoardResponse = boardHttpClient
                 .createBoardRequest("Board" + RandomStringUtils.randomAlphabetic(10));
-        new BoardBO2().setCreateResponse(baseBoardResponse);
-        return new BoardBO2();
+        return new BoardBO2(baseBoardResponse);
     }
-    private void setCreateResponse(BaseBoardResponse createResponse) {
-        this.createResponse = createResponse;
-    }
+//    private void setCreateResponse(BaseBoardResponse createResponse) {
+//        this.createResponse = createResponse;
+//    }
 
-
-
+    //todo maybe doesn't work?????
     public BoardBO2() {
     }
+
+    public BoardBO2(BaseBoardResponse boardResponse) {
+        setResponse(boardResponse);
+    }
+
+    private static void setResponse(BaseBoardResponse response) {
+        createBoardResponse.set(response);
+    }
+
+    public static BaseBoardResponse getCreateBoardResponse() {
+        return createBoardResponse.get();
+    }
+
 
     //todo add labels
 
@@ -151,7 +167,8 @@ public class BoardBO2 {
     }
 
     private BoardBO2 addAllBoardLabelsBO2() {
-        addAllBoardLabels(createResponse.getId());
+        addAllBoardLabels(getCreateBoardResponse().getId());
+//        addAllBoardLabels(createResponse.getId());
         return new BoardBO2();
     }
 

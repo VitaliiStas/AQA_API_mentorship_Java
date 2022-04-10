@@ -1,6 +1,7 @@
-package org.eleks.api.trello.models.requests;
+package org.eleks.api.trello.http_clients;
 
 import org.eleks.api.trello.http_clients.BaseHttpClient;
+import org.eleks.api.trello.models.requests.ListRequest;
 import org.eleks.api.trello.models.responses.BaseBoardResponse;
 import org.eleks.api.trello.models.responses.Lists.ListResponse;
 
@@ -10,9 +11,10 @@ public class ListHttpClient extends BaseHttpClient {
 
     public ListResponse createListRequest(String listName, String idBoard) {
 
-        ListResponse createListRequest = new ListResponse();
+//        ListResponse createListRequest = new ListResponse();
 
-        ListResponse createListResponse = BaseHttpClient
+//        ListResponse createListResponse = BaseHttpClient
+        return BaseHttpClient
                 .createRequestSpecification()
                 .queryParam(listName)
                 .queryParam(idBoard)
@@ -25,7 +27,7 @@ public class ListHttpClient extends BaseHttpClient {
 //                .all()
                 .extract()
                 .as(ListResponse.class);
-        return createListResponse;
+//        return createListResponse;
     }
 
     public ListResponse getListRequest(String idList) {
@@ -40,7 +42,8 @@ public class ListHttpClient extends BaseHttpClient {
 
     public ListRequest updateListRequest(String idList, ListRequest requestBody) {
 
-        ListRequest updateBoardResponse = BaseHttpClient
+//        ListRequest updateBoardResponse = BaseHttpClient
+        return BaseHttpClient
                 .createRequestSpecification()
                 .body(requestBody)
                 .put(PATH + idList)
@@ -49,7 +52,7 @@ public class ListHttpClient extends BaseHttpClient {
 //                .all()
                 .extract()
                 .as(ListRequest.class);
-        return updateBoardResponse;
+//        return updateBoardResponse;
     }
 
 }

@@ -1,12 +1,11 @@
-package org.eleks.api.trello.models.requests;
+package org.eleks.api.trello.models.responses.Cards;
 
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
-import org.eleks.api.trello.models.responses.Cards.*;
 
 import java.util.List;
 
 @JsonIgnoreProperties(ignoreUnknown = true)
-public class CardsRequest {
+public class CardsResponse {
     private DescData descData;
     private List<IdLabelsItem> idLabels;
     private String shortUrl;
@@ -188,7 +187,6 @@ public class CardsRequest {
     public String getLocationName(){
         return locationName;
     }
-
 
 
     public void setUrl(String url){

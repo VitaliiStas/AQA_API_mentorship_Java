@@ -2,26 +2,42 @@ package org.eleks.api.trello.bo;
 
 import io.qameta.allure.Step;
 import org.apache.commons.lang3.RandomStringUtils;
-import org.eleks.api.trello.models.requests.ListHttpClient;
+import org.eleks.api.trello.http_clients.ListHttpClient;
 import org.eleks.api.trello.models.requests.ListRequest;
+import org.eleks.api.trello.models.responses.BaseBoardResponse;
 import org.eleks.api.trello.models.responses.Lists.ListResponse;
 
 import static org.assertj.core.api.Assertions.assertThat;
 
 public class ListBO {
     //    todo fix all static to non-static
-    public BoardBO2 boardBO = new BoardBO2();
+//    public BoardBO2 boardBO = new BoardBO2();
+//    public static BoardBO2 boardBO;
     private ListHttpClient listHttpClient = new ListHttpClient();
     private String boardID;
-    private static ListResponse baseListResponse;
+    //todo why it doesn't work with regular var and setters/getters? because it not static and cant work in the threads????
+    private static ThreadLocal<ListResponse> baseListResponse = new ThreadLocal<>();
+//    private ListResponse baseListResponse;
 
-    private ListBO() {
+    public ListBO() {
     }
-
     //todo create constructor for board id
     public ListBO(String boardID) {
         this.boardID = boardID;
     }
+    public ListBO(ListResponse response) {
+       setBaseListResponse(response);
+    }
+
+    public BoardBO2 initBoardBO() {
+        return new BoardBO2();
+    }
+
+    public CardBO initCardBO() {
+        return new CardBO(getBaseListResponse().getId());
+    }
+
+
 
 /*
     delete
@@ -42,7 +58,7 @@ public class ListBO {
         listRequest.setName("Updated Name");
         listRequest.setPos(123456789);
 
-        updateList(baseListResponse.getId(), listRequest);
+        updateList(getBaseListResponse().getId(), listRequest);
         return new ListBO();
     }
 
@@ -52,7 +68,7 @@ public class ListBO {
         listResponse.setPos(8192);
         listResponse.setClosed(true);
 
-        updateList(baseListResponse.getId(), listResponse);
+        updateList(getBaseListResponse().getId(), listResponse);
         return new ListBO();
     }
 
@@ -60,7 +76,7 @@ public class ListBO {
     public ListBO createListAndCheckResponseBO() {
         createList(boardID);
 
-        assertThat(baseListResponse)
+        assertThat(getBaseListResponse())
                 .isNotNull()
                 .usingRecursiveComparison().ignoringFields("limits")
                 .isEqualTo(getList());
@@ -81,13 +97,16 @@ public class ListBO {
         return request;
     }
 
+    public static ListResponse getBaseListResponse() {
+        return baseListResponse.get();
+    }
 
-    private  void setBaseListResponse(ListResponse baseListResponse) {
-        this.baseListResponse = baseListResponse;
+    public static void setBaseListResponse(ListResponse baseListResponse) {
+        ListBO.baseListResponse.set(baseListResponse);
     }
 
     private ListResponse getList() {
-        return getListById(baseListResponse.getId());
+        return getListById(getBaseListResponse().getId());
     }
 
     @Step("Get List by ID")
@@ -96,13 +115,13 @@ public class ListBO {
     }
 
     @Step("Create List")
-    private ListResponse createList(String boardID) {
-        ListResponse listResponse = baseListResponse = listHttpClient
+    private ListBO createList(String boardID) {
+//        ListResponse listResponse = listHttpClient
+        return new ListBO( listHttpClient
                 .createListRequest("Test_List" + RandomStringUtils.randomAlphabetic(10) + "Test_List"
-                        , boardID);
+                        , boardID));
 
-        setBaseListResponse(listResponse);
-        return listResponse;
+//        return new ListBO();
     }
 
     private void createLists(String boardID, int num) {
@@ -110,9 +129,6 @@ public class ListBO {
             createList(boardID);
         }
     }
-
-
-
 
 
 }

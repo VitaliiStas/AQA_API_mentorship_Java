@@ -1,76 +1,20 @@
+import io.qameta.allure.Step;
 import org.eleks.api.trello.bo.BoardBO2;
-import org.eleks.api.trello.bo.ListBO;
+import org.eleks.api.trello.http_clients.BoardHttpClient;
 import org.eleks.api.trello.listeners.LogListener;
+import org.testng.annotations.AfterMethod;
 import org.testng.annotations.Listeners;
-import org.testng.annotations.Test;
 
 
 @Listeners(LogListener.class)
-public class BaseTest {
-
-    @Test
-    public void deleteBoardTestBO2() {
-        BoardBO2
-                .createBoardBO2()
-                .deleteBoardAndCheckResponseBO2();
+public class BaseTest{
+    @AfterMethod
+    @Step("Close the browser")
+    public void deleteBoard() {
+       new BoardHttpClient()
+               .deleteBoardRequest(BoardBO2.getCreateBoardResponse().getId());
     }
 
-    @Test
-    public void updateBoardTestBO2() {
-        BoardBO2
-                .createBoardBO2()
-                .updateBoardAndCheckResponseBO2()
-                .deleteBoardAndCheckResponseBO2();
-    }
-
-    @Test
-    public void getBoardByIdTestBO2() {
-        BoardBO2
-                .createBoardBO2()
-                .getBoardByIdAndCheckResponseBO2()
-                .deleteBoardAndCheckResponseBO2();
-    }
-
-    @Test
-    public void createLabelOnBoardAndCheckResponseTestBO2() {
-        BoardBO2
-                .createBoardBO2()
-                .createLabelOnBoardAndCheckResponseBO2()
-                .deleteBoardAndCheckResponseBO2()
-        ;
-    }
-
-    @Test
-    public void createListOnBoardAndCheckResponseTestBO2() {
-        BoardBO2
-                .createBoardBO2()
-                .initListBO()
-                .createListAndCheckResponseBO()
-                .boardBO.deleteBoardAndCheckResponseBO2()
-        ;
-    }
-    @Test
-    public void updateListOnBoardAndCheckResponseTestBO2() {
-        BoardBO2
-                .createBoardBO2()
-//                todo use initListBO
-                .initListBO()
-                .createListAndCheckResponseBO()
-                .updateListAndCheckResponseBO()
-                .boardBO.deleteBoardAndCheckResponseBO2()
-        ;
-    }
-    @Test
-    public void closeListOnBoardAndCheckResponseTestBO2() {
-        BoardBO2
-                .createBoardBO2()
-                .initListBO()
-                .createListAndCheckResponseBO()
-                .updateListAndCheckResponseBO()
-                .closeListAndCheckResponseBO()
-                .boardBO.deleteBoardAndCheckResponseBO2()
-        ;
-    }
 
 
 }

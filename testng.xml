@@ -1,14 +1,16 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE suite SYSTEM "http://testng.org/testng-1.0.dtd">
-<suite name="All Test Suite" parallel="methods" thread-count="2" preserve-order="true">
+<suite name="All Test Suite" parallel="methods" thread-count="4" preserve-order="true">
 <!--<suite name="All Test Suite">-->
     <listeners>
         <listener class-name="org.eleks.api.trello.listeners.AnnotationTransformer"/>
     </listeners>
     <test verbose="2" preserve-order="true" name="C:/Users/vitalii.stasiv/Desktop/AQA_mentorship/Project">
         <classes>
-            <class name="BaseTest"></class>
-            <!--            <class name="org.eleks.gmail.vstasiv.Tests2"></class>-->
+            <class name="BoardTests"></class>
+            <class name="CardTests"></class>
+            <class name="ListTest"></class>
+            <class name="TestSuiteGeneral"></class>
         </classes>
     </test>
 </suite>

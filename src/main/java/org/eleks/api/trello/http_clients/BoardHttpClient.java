@@ -30,14 +30,15 @@ public class BoardHttpClient {
     @Step("Send delete board request/DELETE")
     public DeleteBoardResponse deleteBoardRequest(String boardIdForDelete) {
 
-        DeleteBoardResponse deleteBoardResponse = BaseHttpClient
+//        DeleteBoardResponse deleteBoardResponse = BaseHttpClient
+        return BaseHttpClient
                 .createRequestSpecification()
                 .delete(PATH + boardIdForDelete)
                 .then()
                 .log()
                 .all()
                 .statusCode(200).extract().as(DeleteBoardResponse.class);
-        return deleteBoardResponse;
+//        return deleteBoardResponse;
     }
 
     @Step("Send create board request/POST")

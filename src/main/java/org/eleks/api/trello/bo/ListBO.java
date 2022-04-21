@@ -20,14 +20,15 @@ public class ListBO {
 //    private ListResponse baseListResponse;
 
     public ListBO() {
+        if (baseListResponse.get() != null) {
+            this.boardID = baseListResponse.get().getIdBoard();
+        }
     }
     //todo create constructor for board id
     public ListBO(String boardID) {
         this.boardID = boardID;
     }
-    public ListBO(ListResponse response) {
-       setBaseListResponse(response);
-    }
+
 
     public BoardBO2 initBoardBO() {
         return new BoardBO2();
@@ -101,9 +102,9 @@ public class ListBO {
         return baseListResponse.get();
     }
 
-    public static void setBaseListResponse(ListResponse baseListResponse) {
-        ListBO.baseListResponse.set(baseListResponse);
-    }
+//    public static void setBaseListResponse(ListResponse baseListResponse) {
+//        ListBO.baseListResponse.set(baseListResponse);
+//    }
 
     private ListResponse getList() {
         return getListById(getBaseListResponse().getId());
@@ -117,11 +118,10 @@ public class ListBO {
     @Step("Create List")
     private ListBO createList(String boardID) {
 //        ListResponse listResponse = listHttpClient
-        return new ListBO( listHttpClient
-                .createListRequest("Test_List" + RandomStringUtils.randomAlphabetic(10) + "Test_List"
-                        , boardID));
-
-//        return new ListBO();
+//        return new ListBO( listHttpClient
+        baseListResponse.set(listHttpClient.createListRequest("Test_List" + RandomStringUtils.randomAlphabetic(10) + "Test_List"
+                , boardID));
+        return this;
     }
 
     private void createLists(String boardID, int num) {

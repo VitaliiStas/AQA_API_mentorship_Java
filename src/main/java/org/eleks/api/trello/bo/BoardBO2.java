@@ -142,12 +142,13 @@ public class BoardBO2 {
     }
 
     public BoardBO2(BaseBoardResponse boardResponse) {
-        setResponse(boardResponse);
+        createBoardResponse.set(boardResponse);
+//        setResponse(boardResponse);
     }
 
-    private static void setResponse(BaseBoardResponse response) {
-        createBoardResponse.set(response);
-    }
+//    private static void setResponse(BaseBoardResponse response) {
+//        createBoardResponse.set(response);
+//    }
 
     public static BaseBoardResponse getCreateBoardResponse() {
         return createBoardResponse.get();

@@ -13,8 +13,8 @@ import java.util.List;
 import static org.assertj.core.api.Assertions.assertThat;
 
 public class CardBO {
-    private static String listID;
-    private static CardsHttpClient cardHttpClient = new CardsHttpClient();
+    private String listID;
+    private CardsHttpClient cardHttpClient = new CardsHttpClient();
     private static ThreadLocal<CardsResponse> baseCardResponse = new ThreadLocal<>();
 
     private static List<String> colors =

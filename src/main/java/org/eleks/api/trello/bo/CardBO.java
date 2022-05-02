@@ -27,19 +27,19 @@ public class CardBO {
             Arrays.asList("To Do", "Doing", "Done");
 
 
-    //todo
+
     public CardBO moveCardToBetweenLists() {
         /*
         I'm extracting listId(list for the moving card ) from the map(saved all list names & listId)
         "defaultLists" List of default board lists
  */
-//        return moveCardToTheList(baseCardResponse.get().getId()
-//                , allBoardsId().get(defaultLists.get(0)));
-//        for (int i = 0; i < defaultLists.size(); i++) {
-//            moveCardToTheList(baseCardResponse.get().getId()
-//                    , allBoardsId().get(defaultLists.get(i)));
-//        }
-        defaultLists.stream().forEach(x-> moveCardToTheList(baseCardResponse.get().getId(),x));
+
+        for (int i = 0; i < defaultLists.size(); i++) {
+            moveCardToTheList(baseCardResponse.get().getId()
+                    , allBoardsId().get(defaultLists.get(i)));
+        }
+        //todo doesn't work
+//        defaultLists.stream().forEach(x-> moveCardToTheList(baseCardResponse.get().getId(),x));
         return this;
     }
 

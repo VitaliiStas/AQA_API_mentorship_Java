@@ -1,9 +1,11 @@
 package org.eleks.api.trello.bo;
 
+import com.fasterxml.jackson.databind.exc.MismatchedInputException;
 import io.qameta.allure.Step;
 import org.apache.commons.lang3.RandomStringUtils;
 import org.eleks.api.trello.http_clients.BoardHttpClient;
 import org.eleks.api.trello.http_clients.BoardLableHttpClient;
+import org.eleks.api.trello.http_clients.GetAllListHttpClient;
 import org.eleks.api.trello.models.requests.BaseBoardRequest;
 import org.eleks.api.trello.models.requests.BoardBodyBuilder;
 import org.eleks.api.trello.models.requests.board_request_nested_objects.LabelNames;
@@ -11,8 +13,7 @@ import org.eleks.api.trello.models.responses.BaseBoardResponse;
 import org.eleks.api.trello.models.responses.DeleteBoardResponse;
 import org.testng.Assert;
 
-import java.util.Arrays;
-import java.util.List;
+import java.util.*;
 
 import static org.assertj.core.api.Assertions.assertThat;
 
@@ -26,6 +27,7 @@ public class BoardBO2 {
             Arrays.asList("blue", "black", "red", "green", "purple", "orange", "yellow");
 
 
+
     //todo new method initListBO(){
 
     public ListBO initListBO() {
@@ -33,6 +35,27 @@ public class BoardBO2 {
     }
 //        return new ListBO(createResponse.getId());
 //    }
+
+
+//    public HashMap<String,String> allBoardsId() {
+//        HashMap<String,String> idsMap= new HashMap<>();
+//         Arrays.stream(new GetAllListHttpClient()
+//                .getAllListsFromBoard(getCreateBoardResponse().getId()))
+//                 .forEach(x->idsMap.put(x.getResponse().iterator().next().getName()
+//                         ,x.getResponse().iterator().next().getId()));
+//        return idsMap;
+//             }
+
+
+//    public HashMap<String,String> allBoardsId() {
+//        HashMap<String,String> idsMap= new HashMap<>();
+//        new GetAllListHttpClient()
+//                .getAllListsFromBoard(getCreateBoardResponse().getId())
+//                .getResponse()
+//                .forEach(x->idsMap.put(x.getName(), x.getId()));
+//        return idsMap;
+//    }
+
 
 
     //    todo how to compare two diff JSON?? or how to create map from

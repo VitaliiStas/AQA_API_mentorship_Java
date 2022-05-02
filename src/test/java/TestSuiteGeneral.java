@@ -89,4 +89,21 @@ public class TestSuiteGeneral extends BaseTest {
 //                .deleteBoardAndCheckResponseBO2()
         ;
     }
+
+    @Test
+    public void moveCardBetweenListsAndCheckResponseTestBO2() {
+        BoardBO2
+                .createBoardBO2()
+                .initListBO()
+                .createListAndCheckResponseBO()
+                .initCardBO()
+                .createCardAndCheckResponse()
+                .moveCardToBetweenLists()
+//                .createCardAndCheckResponse()
+//                .initListBO()
+//                .closeListAndCheckResponseBO()
+//                .initBoardBO()
+//                .deleteBoardAndCheckResponseBO2()
+        ;
+    }
 }

@@ -3,6 +3,9 @@ package org.eleks.api.trello.http_clients;
 import io.qameta.allure.Step;
 import org.eleks.api.trello.models.requests.BaseBoardRequest;
 import org.eleks.api.trello.models.responses.*;
+import org.eleks.api.trello.models.responses.Lists.ListResponse;
+
+import java.util.Map;
 
 
 public class BoardHttpClient {

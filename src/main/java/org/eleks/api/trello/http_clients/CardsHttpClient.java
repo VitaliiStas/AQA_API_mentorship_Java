@@ -2,10 +2,7 @@ package org.eleks.api.trello.http_clients;
 
 import io.qameta.allure.Step;
 import org.eleks.api.trello.models.requests.CardsRequest;
-import org.eleks.api.trello.models.requests.ListRequest;
 import org.eleks.api.trello.models.responses.Cards.CardsResponse;
-import org.eleks.api.trello.models.responses.DeleteBoardResponse;
-import org.eleks.api.trello.models.responses.Lists.ListResponse;
 
 public class CardsHttpClient extends BaseHttpClient {
     protected static final String PATH = "/cards/";

@@ -10,21 +10,15 @@ import org.eleks.api.trello.models.responses.Lists.ListResponse;
 import static org.assertj.core.api.Assertions.assertThat;
 
 public class ListBO {
-    //    todo fix all static to non-static
-//    public BoardBO2 boardBO = new BoardBO2();
-//    public static BoardBO2 boardBO;
     private ListHttpClient listHttpClient = new ListHttpClient();
     private String boardID;
-    //todo why it doesn't work with regular var and setters/getters? because it not static and cant work in the threads????
     private static ThreadLocal<ListResponse> baseListResponse = new ThreadLocal<>();
-//    private ListResponse baseListResponse;
 
     public ListBO() {
         if (baseListResponse.get() != null) {
             this.boardID = baseListResponse.get().getIdBoard();
         }
     }
-    //todo create constructor for board id
     public ListBO(String boardID) {
         this.boardID = boardID;
     }

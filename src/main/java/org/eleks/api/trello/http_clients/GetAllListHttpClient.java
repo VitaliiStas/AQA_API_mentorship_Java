@@ -19,14 +19,4 @@ public class GetAllListHttpClient extends BoardHttpClient {
                 ;
         return listResponses;
     }
-//    public GetAllListResponse getAllListsFromBoard (String boardId){
-//            return BaseHttpClient.createRequestSpecification()
-//                    .get(PATH + boardId+"/lists")
-//                    .then()
-//                    .log()
-//                    .all()
-//                    .extract()
-//                    .as(GetAllListResponse.class)
-//                    ;
-//    }
 }

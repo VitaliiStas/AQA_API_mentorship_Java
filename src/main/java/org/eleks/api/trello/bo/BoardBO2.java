@@ -28,42 +28,16 @@ public class BoardBO2 {
 
 
 
-    //todo new method initListBO(){
 
     public ListBO initListBO() {
         return new ListBO(getCreateBoardResponse().getId());
     }
-//        return new ListBO(createResponse.getId());
-//    }
-
-
-//    public HashMap<String,String> allBoardsId() {
-//        HashMap<String,String> idsMap= new HashMap<>();
-//         Arrays.stream(new GetAllListHttpClient()
-//                .getAllListsFromBoard(getCreateBoardResponse().getId()))
-//                 .forEach(x->idsMap.put(x.getResponse().iterator().next().getName()
-//                         ,x.getResponse().iterator().next().getId()));
-//        return idsMap;
-//             }
-
-
-//    public HashMap<String,String> allBoardsId() {
-//        HashMap<String,String> idsMap= new HashMap<>();
-//        new GetAllListHttpClient()
-//                .getAllListsFromBoard(getCreateBoardResponse().getId())
-//                .getResponse()
-//                .forEach(x->idsMap.put(x.getName(), x.getId()));
-//        return idsMap;
-//    }
-
 
 
     //    todo how to compare two diff JSON?? or how to create map from
     public BoardBO2 createLabelOnBoardAndCheckResponseBO2() {
-//        String boardID = createResponse.getId();
         String boardID = getCreateBoardResponse().getId();
         BaseBoardResponse labelNames = addBoardLabel(boardID, "LabelName", colors.get(1));
-//        boardHttpClient.getBoardByIdRequest(boardID).getLabelNames();
 
 
         assertThat(labelNames)
@@ -71,6 +45,7 @@ public class BoardBO2 {
                 .usingRecursiveComparison()
                 .ignoringFields("labelNames", "color", "name", "id", "desc", "prefs")
                 .isEqualTo(boardHttpClient.getBoardByIdRequest(boardID).getLabelNames().getBlack())
+
 //todo diff json how to create check properly??
         ;
 //        {
@@ -102,7 +77,6 @@ public class BoardBO2 {
     public BoardBO2 getBoardByIdAndCheckResponseBO2() {
         BaseBoardResponse baseBoardResponse = boardHttpClient.getBoardByIdRequest(
                 getCreateBoardResponse().getId());
-//                createResponse.getId());
 
         assertThat(baseBoardResponse)
                 .isNotNull()
@@ -126,7 +100,6 @@ public class BoardBO2 {
 
         BaseBoardResponse baseBoardResponse = boardHttpClient.updateBoard(
                 getCreateBoardResponse().getId(), baseBoardRequest);
-//                createResponse.getId(), baseBoardRequest);
 
         assertThat(baseBoardResponse)
                 .isNotNull()
@@ -166,12 +139,7 @@ public class BoardBO2 {
 
     public BoardBO2(BaseBoardResponse boardResponse) {
         createBoardResponse.set(boardResponse);
-//        setResponse(boardResponse);
     }
-
-//    private static void setResponse(BaseBoardResponse response) {
-//        createBoardResponse.set(response);
-//    }
 
     public static BaseBoardResponse getCreateBoardResponse() {
         return createBoardResponse.get();
@@ -192,7 +160,6 @@ public class BoardBO2 {
 
     private BoardBO2 addAllBoardLabelsBO2() {
         addAllBoardLabels(getCreateBoardResponse().getId());
-//        addAllBoardLabels(createResponse.getId());
         return new BoardBO2();
     }
 

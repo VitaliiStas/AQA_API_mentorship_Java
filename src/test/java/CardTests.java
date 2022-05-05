@@ -50,4 +50,43 @@ public class CardTests extends BaseTest {
                 .deleteCardAndCheckResponse()
         ;
     }
+//    todo added
+    @Test
+    public void moveCardBetweenListsAndCheckTestBO2() {
+        BoardBO2
+                .createBoardBO2()
+                .initListBO()
+                .createListAndCheckResponseBO()
+                .initCardBO()
+                .createCardAndCheckResponse()
+                .moveCardToBetweenListsAndCheck()
+        ;
+    }
+
+    @Test
+    public void createChecklistToCardAndCheckResponseTestBO2() {
+        BoardBO2
+                .createBoardBO2()
+                .initListBO()
+                .createListAndCheckResponseBO()
+                .initCardBO()
+                .createCardAndCheckResponse()
+                .initChecklistBO()
+                .createChecklistAndCheckResponse()
+        ;
+    }
+
+    @Test
+    public void addChecklistItemsToCardAndCheckTestBO2() {
+        BoardBO2
+                .createBoardBO2()
+                .initListBO()
+                .createListAndCheckResponseBO()
+                .initCardBO()
+                .createCardAndCheckResponse()
+                .initChecklistBO()
+                .createChecklistAndCheckResponse()
+                .addChecklistItemsAndCheck()
+        ;
+    }
 }

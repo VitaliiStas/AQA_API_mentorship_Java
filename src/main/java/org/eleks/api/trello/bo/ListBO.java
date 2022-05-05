@@ -4,7 +4,6 @@ import io.qameta.allure.Step;
 import org.apache.commons.lang3.RandomStringUtils;
 import org.eleks.api.trello.http_clients.ListHttpClient;
 import org.eleks.api.trello.models.requests.ListRequest;
-import org.eleks.api.trello.models.responses.BaseBoardResponse;
 import org.eleks.api.trello.models.responses.Lists.ListResponse;
 
 import static org.assertj.core.api.Assertions.assertThat;
@@ -113,8 +112,9 @@ public class ListBO {
     private ListBO createList(String boardID) {
 //        ListResponse listResponse = listHttpClient
 //        return new ListBO( listHttpClient
-        baseListResponse.set(listHttpClient.createListRequest("Test_List" + RandomStringUtils.randomAlphabetic(10) + "Test_List"
-                , boardID));
+        baseListResponse.set(listHttpClient
+                .createListRequest("Test_List"
+                                + RandomStringUtils.randomAlphabetic(10) + "Test_List" , boardID));
         return this;
     }
 

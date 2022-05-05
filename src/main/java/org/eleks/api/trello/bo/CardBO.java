@@ -6,6 +6,7 @@ import org.eleks.api.trello.http_clients.GetAllListHttpClient;
 import org.eleks.api.trello.models.requests.CardsRequest;
 import org.eleks.api.trello.models.responses.Cards.CardsResponse;
 import org.eleks.api.trello.models.responses.Cards.Cover;
+import org.testng.Assert;
 
 import java.util.Arrays;
 import java.util.HashMap;
@@ -28,18 +29,26 @@ public class CardBO {
 
 
 
-    public CardBO moveCardToBetweenLists() {
+
+
+    public CardBO moveCardToBetweenListsAndCheck() {
         /*
         I'm extracting listId(list for the moving card ) from the map(saved all list names & listId)
         "defaultLists" List of default board lists
  */
+        //todo doesn't work
+//        defaultLists.stream().forEach(x-> moveCardToTheList(baseCardResponse.get().getId(),x));
 
         for (int i = 0; i < defaultLists.size(); i++) {
             moveCardToTheList(baseCardResponse.get().getId()
-                    , allBoardsId().get(defaultLists.get(i)));
+                    , allBoardListsId().get(defaultLists.get(i)));
+
+//            todo check if moved to the correct List
+
+            Assert.assertEquals(getCardById(baseCardResponse.get().getId()).getIdList()
+                    ,allBoardListsId().get(defaultLists.get(i))
+                    ,"Card moved to the incorrect List: '"+defaultLists.get(i)+"'");
         }
-        //todo doesn't work
-//        defaultLists.stream().forEach(x-> moveCardToTheList(baseCardResponse.get().getId(),x));
         return this;
     }
 
@@ -51,8 +60,8 @@ public class CardBO {
         return new CardBO();
     }
 
-    //todo don't work cant deserialize from array ?????
-    private HashMap<String, String> allBoardsId() {
+    //todo work fine ?????
+    private HashMap<String, String> allBoardListsId() {
 /* I'm parsing it and extract key:"name" and value:"getId" to the map
 From this map I'm extracting
  */
@@ -65,22 +74,21 @@ From this map I'm extracting
     }
 
     private CardBO() {
+        if (baseCardResponse.get() != null) {
+            this.listID = baseCardResponse.get().getIdList();
+        }
+    }
+
+    public ChecklistBO initChecklistBO() {
+        return new ChecklistBO(getBaseCardResponse().getId());
     }
 
     public CardBO(String listID) {
         this.listID = listID;
     }
 
-    private CardBO(CardsResponse cardsResponse) {
-        setBaseCardResponse(cardsResponse);
-    }
-
-    public static CardsResponse getBaseCardResponse() {
+    private static CardsResponse getBaseCardResponse() {
         return baseCardResponse.get();
-    }
-
-    public static void setBaseCardResponse(CardsResponse baseCardResponse) {
-        CardBO.baseCardResponse.set(baseCardResponse);
     }
 
     public ListBO initListBO() {
@@ -117,14 +125,13 @@ From this map I'm extracting
 
 
     public CardBO createCardAndCheckResponse() {
-        CardsResponse cardsResponse = createCard(listID, "New Test Card" + RandomStringUtils.randomAlphabetic(10));
-
-        assertThat(cardsResponse)
+        createCard(listID, "New Test Card" + RandomStringUtils.randomAlphabetic(10));
+        assertThat(getBaseCardResponse())
                 .isNotNull()
                 .usingRecursiveComparison()
                 .ignoringFields("limits")
-                .isEqualTo(getCardById(cardsResponse.getId()));
-        return new CardBO(cardsResponse);
+                .isEqualTo(getCardById(getBaseCardResponse().getId()));
+        return new CardBO();
     }
 
     private CardBO multiCardsCreation() {
@@ -132,8 +139,12 @@ From this map I'm extracting
         return new CardBO();
     }
 
-    private CardsResponse createCard(String listID, String cardName) {
-        return cardHttpClient.createCardRequest(listID, cardName);
+
+
+//    private CardsResponse createCard(String listID, String cardName) {
+    private CardBO createCard(String listID, String cardName) {
+        baseCardResponse.set(cardHttpClient.createCardRequest(listID, cardName));
+        return this;
     }
 
     private void createCards(String listID, int cardCount) {

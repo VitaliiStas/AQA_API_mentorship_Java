@@ -9,7 +9,6 @@ public class CardsHttpClient extends BaseHttpClient {
 
 
     @Step("Create a new Card on a Board")
-//todo Add update card Request
     public CardsResponse createCardRequest(String idList,String name) {
 //        CardsResponse createCardResponse = BaseHttpClient
         return BaseHttpClient
@@ -30,8 +29,8 @@ public class CardsHttpClient extends BaseHttpClient {
         return BaseHttpClient.createRequestSpecification()
                 .get(PATH + idCard)
                 .then()
-//                .log()
-//                .all()
+                .log()
+                .all()
                 .extract()
                 .as(CardsResponse.class);
     }

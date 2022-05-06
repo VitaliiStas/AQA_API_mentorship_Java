@@ -2,6 +2,9 @@ package org.eleks.api.trello.http_clients;
 
 import org.eleks.api.trello.models.requests.Checklist.ChecklistRequest;
 import org.eleks.api.trello.models.responses.Checklist.ChecklistResponse;
+import org.eleks.api.trello.models.responses.Checklist.GetChecklistItemsList.GetChecklistItems;
+
+import java.util.List;
 
 public class ChecklistHttpClient extends BaseHttpClient {
     protected static final String PATH = "/checklists/";
@@ -39,6 +42,7 @@ public class ChecklistHttpClient extends BaseHttpClient {
                 .all()
                 .statusCode(200).extract().as(ChecklistResponse.class);
     }
+
     public ChecklistRequest updateChecklistRequest(String idChecklist, ChecklistRequest checklistRequestBody) {
         return BaseHttpClient
                 .createRequestSpecification()
@@ -50,11 +54,12 @@ public class ChecklistHttpClient extends BaseHttpClient {
                 .extract()
                 .as(ChecklistRequest.class);
     }
-//protected static final String PATH = "/checklists/";
+
+    //protected static final String PATH = "/checklists/";
     public ChecklistRequest addChecklistItemsRequest(String idChecklist, String checklistItem) {
         return BaseHttpClient
                 .createRequestSpecification()
-                .basePath(PATH+idChecklist+"/checkItems/")
+                .basePath(PATH + idChecklist + "/checkItems/")
                 .queryParams("name", checklistItem)
                 .post()
                 .then()
@@ -62,6 +67,19 @@ public class ChecklistHttpClient extends BaseHttpClient {
                 .all()
                 .extract()
                 .as(ChecklistRequest.class);
+    }
+
+    public List<GetChecklistItems> getChecklistItemsRequest(String idChecklist) {
+
+        List<GetChecklistItems> getChecklistItemsList = BaseHttpClient.createRequestSpecification()
+                .get(PATH + idChecklist + "/checkItems/")
+                .then()
+                .log()
+                .all()
+                .extract()
+//                .as(List<GetChecklistItems>.class);
+                .body().jsonPath().getList(".", GetChecklistItems.class);
+        return getChecklistItemsList;
     }
 
 }

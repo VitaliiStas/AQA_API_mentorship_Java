@@ -2,7 +2,7 @@ package org.eleks.api.trello.models.requests.Checklist;
 
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import com.fasterxml.jackson.annotation.JsonProperty;
-import org.eleks.api.trello.models.responses.Checklist.Limits;
+import org.eleks.api.trello.models.responses.Checklist.GetChecklistItemsList.Limits;
 
 import java.util.List;
 

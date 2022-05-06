@@ -4,6 +4,8 @@ import java.util.List;
 
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import com.fasterxml.jackson.annotation.JsonProperty;
+import org.eleks.api.trello.models.responses.Checklist.GetChecklistItemsList.Limits;
+
 @JsonIgnoreProperties(ignoreUnknown = true)
 public class ChecklistResponse {
 	@JsonProperty("idBoard")

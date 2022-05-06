@@ -11,7 +11,7 @@ public class BaseTest{
     @AfterMethod
     @Step("Close the browser")
     public void deleteBoard() {
-//       new BoardHttpClient()
-//               .deleteBoardRequest(BoardBO2.getCreateBoardResponse().getId());
+       new BoardHttpClient()
+               .deleteBoardRequest(BoardBO2.getCreateBoardResponse().getId());
     }
 }

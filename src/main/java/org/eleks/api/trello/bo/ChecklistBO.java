@@ -3,8 +3,9 @@ package org.eleks.api.trello.bo;
 import org.apache.commons.lang3.RandomStringUtils;
 import org.eleks.api.trello.http_clients.ChecklistHttpClient;
 import org.eleks.api.trello.models.requests.Checklist.ChecklistRequest;
-import org.eleks.api.trello.models.responses.Cards.Cover;
 import org.eleks.api.trello.models.responses.Checklist.ChecklistResponse;
+import org.eleks.api.trello.models.responses.Checklist.GetChecklistItemsList.GetChecklistItems;
+import org.testng.Assert;
 
 import java.util.Arrays;
 import java.util.List;
@@ -36,10 +37,10 @@ public class ChecklistBO {
 
 
     public ChecklistBO createChecklistAndCheckResponse() {
-        ChecklistBO checklistBO = createChecklist(idCard
+        createChecklist(idCard
                 , "New Test Checklist" + RandomStringUtils.randomAlphabetic(10));
 
-        assertThat(checklistBO)
+        assertThat(getBaseChecklistResponse())
                 .isNotNull()
                 .usingRecursiveComparison()
                 .ignoringFields("limits")
@@ -49,10 +50,17 @@ public class ChecklistBO {
 
 //todo add checking
     public ChecklistBO addChecklistItemsAndCheck() {
+        String checklistId = getBaseChecklistResponse().getId();
 
         for (int i = 0; i <checklistItemsList.size() ; i++) {
             checklistHttpClient
-                    .addChecklistItemsRequest(getBaseChecklistResponse().getId(),checklistItemsList.get(i));
+                    .addChecklistItemsRequest(checklistId,checklistItemsList.get(i));
+        }
+        List<GetChecklistItems> checkListResponse =checklistHttpClient.getChecklistItemsRequest(checklistId);
+
+        for (int i = 0; i <checkListResponse.size() ; i++) {
+            Assert.assertEquals(checkListResponse.get(i).getName(),checklistItemsList.get(i)
+                    ,"<!!!!!!!!Checklist Items mismatch!!!!!!!>");
         }
         return new ChecklistBO();
     }
@@ -83,26 +91,37 @@ public class ChecklistBO {
         ChecklistHttpClient checklistHttpClient = new ChecklistHttpClient();
 //        checklistHttpClient.createChecklistRequest("6273d28ba6924d842050cd78", "2test checklist2").getId();
 //        checklistHttpClient.deleteChecklistRequest("6273f021c9cd488a7ca88822");
-//        checklistHttpClient.getChecklistRequest("6273f537354b03587ffd01be");
+        checklistHttpClient.getChecklistRequest("627448b5a2d2a01a98d0b48a");
 
         ChecklistRequest checklistRequestBody = new ChecklistRequest();
 //        List<String> list = Arrays.asList("1.item1", "2.item2", "3.item3");
 //        checklistRequestBody.setCheckItems(checklistItemsList);
 //        checklistRequestBody.setCheckItems(list);
 //        checklistHttpClient.updateChecklistRequest("62743d09924ec00e284a3a9a", checklistRequestBody);
-        checklistHttpClient
-                .addChecklistItemsRequest(checklistHttpClient
-                        .createChecklistRequest("6273d28ba6924d842050cd78", "2test checklist2").getId(), checklistItemsList.get(1));
+//        checklistHttpClient
+//                .addChecklistItemsRequest(checklistHttpClient
+//                        .createChecklistRequest("6273d28ba6924d842050cd78", "2test checklist2").getId(), checklistItemsList.get(1));
     }
 }
 /*
  {
-    "id": "6273d9dffb56a0508a376f5f",
-    "name": "test checklist",
-    "idBoard": "6273d26fae8b9b07a3cef076",
-    "idCard": "6273d28ba6924d842050cd78",
+    "idChecklist": "627448b5a2d2a01a98d0b48a",
+    "state": "incomplete",
+    "id": "627448b661c90c4149d9c319",
+    "name": "2.item2",
+    "nameData": {
+        "emoji": {
+
+        }
+    },
     "pos": 16384,
-    "checkItems": [],
-    "limits": {}
+    "due": null,
+    "idMember": null,
+    "limits": {
+
+    }
 }
+
+Process finished with exit code 0
+
 * */

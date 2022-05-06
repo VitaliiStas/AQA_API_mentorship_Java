@@ -48,26 +48,26 @@ public class ChecklistBO {
         return new ChecklistBO();
     }
 
-//todo add checking
+    //todo add checking
     public ChecklistBO addChecklistItemsAndCheck() {
         String checklistId = getBaseChecklistResponse().getId();
 
-        for (int i = 0; i <checklistItemsList.size() ; i++) {
+        for (int i = 0; i < checklistItemsList.size(); i++) {
             checklistHttpClient
-                    .addChecklistItemsRequest(checklistId,checklistItemsList.get(i));
+                    .addChecklistItemsRequest(checklistId, checklistItemsList.get(i));
         }
-        List<GetChecklistItems> checkListResponse =checklistHttpClient.getChecklistItemsRequest(checklistId);
+        List<GetChecklistItems> checkListResponse = checklistHttpClient.getChecklistItemsRequest(checklistId);
 
-        for (int i = 0; i <checkListResponse.size() ; i++) {
-            Assert.assertEquals(checkListResponse.get(i).getName(),checklistItemsList.get(i)
-                    ,"<!!!!!!!!Checklist Items mismatch!!!!!!!>");
+        for (int i = 0; i < checkListResponse.size(); i++) {
+            Assert.assertEquals(checkListResponse.get(i).getName(), checklistItemsList.get(i)
+                    , "<!!!!!!!!Checklist Items mismatch!!!!!!!>");
         }
         return new ChecklistBO();
     }
 
 
     private ChecklistRequest addChecklistItems(String idChecklist, String checklistItemName) {
-        return checklistHttpClient.addChecklistItemsRequest(idChecklist,checklistItemName);
+        return checklistHttpClient.addChecklistItemsRequest(idChecklist, checklistItemName);
     }
 
     private ChecklistBO createChecklist(String idCard, String checklistName) {
@@ -81,26 +81,6 @@ public class ChecklistBO {
 
     private ChecklistRequest updateChecklistById(String idChecklist, ChecklistRequest checklistRequestBody) {
         return checklistHttpClient.updateChecklistRequest(idChecklist, checklistRequestBody);
-    }
-
-
-    //todo DELETE
-    public static void main(String[] args) {
-        //        cardBO.getCardById("6273d28ba6924d842050cd78");
-//  checklist "6273f537354b03587ffd01be
-        ChecklistHttpClient checklistHttpClient = new ChecklistHttpClient();
-//        checklistHttpClient.createChecklistRequest("6273d28ba6924d842050cd78", "2test checklist2").getId();
-//        checklistHttpClient.deleteChecklistRequest("6273f021c9cd488a7ca88822");
-        checklistHttpClient.getChecklistRequest("627448b5a2d2a01a98d0b48a");
-
-        ChecklistRequest checklistRequestBody = new ChecklistRequest();
-//        List<String> list = Arrays.asList("1.item1", "2.item2", "3.item3");
-//        checklistRequestBody.setCheckItems(checklistItemsList);
-//        checklistRequestBody.setCheckItems(list);
-//        checklistHttpClient.updateChecklistRequest("62743d09924ec00e284a3a9a", checklistRequestBody);
-//        checklistHttpClient
-//                .addChecklistItemsRequest(checklistHttpClient
-//                        .createChecklistRequest("6273d28ba6924d842050cd78", "2test checklist2").getId(), checklistItemsList.get(1));
     }
 }
 /*

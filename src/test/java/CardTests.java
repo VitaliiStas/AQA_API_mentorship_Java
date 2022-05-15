@@ -64,7 +64,7 @@ public class CardTests extends BaseTest {
     }
 
     @Test
-    public void createChecklistToCardAndCheckResponseTestBO2() {
+    public void addChecklistToCardAndCheckResponseTestBO2() {
         BoardBO2
                 .createBoardBO2()
                 .initListBO()
@@ -87,6 +87,18 @@ public class CardTests extends BaseTest {
                 .initChecklistBO()
                 .createChecklistAndCheckResponse()
                 .addChecklistItemsAndCheck()
+        ;
+    }
+    @Test
+    public void addAttachmentToCardAndCheckTestBO2() {
+        BoardBO2
+                .createBoardBO2()
+                .initListBO()
+                .createListAndCheckResponseBO()
+                .initCardBO()
+                .createCardAndCheckResponse()
+                .initCardAttachmentBO()
+                .addAttachmentToCard()
         ;
     }
 }

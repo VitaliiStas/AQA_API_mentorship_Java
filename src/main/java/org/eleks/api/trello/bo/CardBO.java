@@ -1,5 +1,6 @@
 package org.eleks.api.trello.bo;
 
+import io.qameta.allure.Step;
 import org.apache.commons.lang3.RandomStringUtils;
 import org.eleks.api.trello.http_clients.CardsHttpClient;
 import org.eleks.api.trello.http_clients.GetAllListHttpClient;
@@ -28,9 +29,6 @@ public class CardBO {
             Arrays.asList("To Do", "Doing", "Done");
 
 
-
-
-
     public CardBO moveCardToBetweenListsAndCheck() {
         /*
         I'm extracting listId(list for the moving card ) from the map(saved all list names & listId)
@@ -46,8 +44,8 @@ public class CardBO {
 //            todo check if moved to the correct List
 
             Assert.assertEquals(getCardById(baseCardResponse.get().getId()).getIdList()
-                    ,allBoardListsId().get(defaultLists.get(i))
-                    ,"Card moved to the incorrect List: '"+defaultLists.get(i)+"'");
+                    , allBoardListsId().get(defaultLists.get(i))
+                    , "Card moved to the incorrect List: '" + defaultLists.get(i) + "'");
         }
         return this;
     }
@@ -73,27 +71,32 @@ From this map I'm extracting
         return idsMap;
     }
 
-    private CardBO() {
+    public CardBO() {
         if (baseCardResponse.get() != null) {
             this.listID = baseCardResponse.get().getIdList();
         }
     }
 
+    public CardBO(String listID) {
+        this.listID = listID;
+    }
+    @Step("Return to the list")
+    public ListBO initListBO() {
+        return new ListBO();
+    }
+    @Step("Go to the checklist")
     public ChecklistBO initChecklistBO() {
         return new ChecklistBO(getBaseCardResponse().getId());
     }
-
-    public CardBO(String listID) {
-        this.listID = listID;
+    @Step("Go to the attachment")
+    public CardAttachmentBO initCardAttachmentBO() {
+        return new CardAttachmentBO(getBaseCardResponse().getId());
     }
 
     private static CardsResponse getBaseCardResponse() {
         return baseCardResponse.get();
     }
 
-    public ListBO initListBO() {
-        return new ListBO();
-    }
 
     public CardBO getCardAndCheckResponse() {
         CardsResponse cardsResponse = getCardById(getBaseCardResponse().getId());
@@ -105,12 +108,14 @@ From this map I'm extracting
         return new CardBO();
     }
 
+    @Step("Delete card")
     public CardBO deleteCardAndCheckResponse() {
         CardsResponse cardsResponse = deleteCard(getBaseCardResponse().getId());
         assertThat(cardsResponse).isNotNull();
         return new CardBO();
     }
 
+    @Step("Update card")
     public CardBO updateCardAndCheckResponse() {
         CardsRequest cardsRequest = new CardsRequest();
         cardsRequest.setName("UPDATED NAME");
@@ -123,7 +128,7 @@ From this map I'm extracting
         return new CardBO();
     }
 
-
+    @Step("Create new card")
     public CardBO createCardAndCheckResponse() {
         createCard(listID, "New Test Card" + RandomStringUtils.randomAlphabetic(10));
         assertThat(getBaseCardResponse())
@@ -140,8 +145,7 @@ From this map I'm extracting
     }
 
 
-
-//    private CardsResponse createCard(String listID, String cardName) {
+    //    private CardsResponse createCard(String listID, String cardName) {
     private CardBO createCard(String listID, String cardName) {
         baseCardResponse.set(cardHttpClient.createCardRequest(listID, cardName));
         return this;

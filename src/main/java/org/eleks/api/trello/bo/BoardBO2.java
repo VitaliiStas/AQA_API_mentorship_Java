@@ -18,8 +18,6 @@ import java.util.*;
 import static org.assertj.core.api.Assertions.assertThat;
 
 public class BoardBO2 {
-    //todo static createResponse2 should be wrapped in thread local, it should be set in the default constructor BoardBO2
-//    private BaseBoardResponse createResponse;
     private static ThreadLocal<BaseBoardResponse> createBoardResponse = new ThreadLocal<>();
     private static BoardHttpClient boardHttpClient = new BoardHttpClient();
 
@@ -27,14 +25,13 @@ public class BoardBO2 {
             Arrays.asList("blue", "black", "red", "green", "purple", "orange", "yellow");
 
 
-
-
+    @Step("Go to the list")
     public ListBO initListBO() {
         return new ListBO(getCreateBoardResponse().getId());
     }
 
 
-    //    todo how to compare two diff JSON?? or how to create map from
+    //    todo how to compare two diff JSON?? or how to create map from, now check only Black label
     public BoardBO2 createLabelOnBoardAndCheckResponseBO2() {
         String boardID = getCreateBoardResponse().getId();
         BaseBoardResponse labelNames = addBoardLabel(boardID, "LabelName", colors.get(1));
@@ -113,13 +110,13 @@ public class BoardBO2 {
     }
 
     @Step("Delete created/updated board")
-    public void deleteBoardAndCheckResponseBO2() {
+    public BoardBO2 deleteBoardAndCheckResponseBO2() {
         Assert.assertEquals(boardHttpClient
                 .deleteBoardRequest(getCreateBoardResponse().getId())
 //                .deleteBoardRequest(createResponse.getId())
                 .get_value(), new DeleteBoardResponse()
                 .get_value(), "ListResponse mismatch");
-
+        return this;
     }
 
     //todo createBoardBO2() should be only static
@@ -129,11 +126,7 @@ public class BoardBO2 {
                 .createBoardRequest("Board" + RandomStringUtils.randomAlphabetic(10));
         return new BoardBO2(baseBoardResponse);
     }
-//    private void setCreateResponse(BaseBoardResponse createResponse) {
-//        this.createResponse = createResponse;
-//    }
 
-    //todo maybe doesn't work?????
     public BoardBO2() {
     }
 

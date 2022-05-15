@@ -6,19 +6,13 @@ import org.testng.annotations.Test;
 @Listeners(LogListener.class)
 public class TestSuiteGeneral extends BaseTest {
 
-//    @Test
-//    public void deleteBoardTestBO2() {
-//        BoardBO2
-//                .createBoardBO2()
-//                .deleteBoardAndCheckResponseBO2();
-//    }
+
 
     @Test
     public void updateBoardTestBO2() {
         BoardBO2
                 .createBoardBO2()
                 .updateBoardAndCheckResponseBO2()
-//                .deleteBoardAndCheckResponseBO2()
                 ;
     }
 
@@ -27,7 +21,6 @@ public class TestSuiteGeneral extends BaseTest {
         BoardBO2
                 .createBoardBO2()
                 .getBoardByIdAndCheckResponseBO2()
-//                .deleteBoardAndCheckResponseBO2()
         ;
     }
 
@@ -36,7 +29,6 @@ public class TestSuiteGeneral extends BaseTest {
         BoardBO2
                 .createBoardBO2()
                 .createLabelOnBoardAndCheckResponseBO2()
-//                .deleteBoardAndCheckResponseBO2()
         ;
     }
 
@@ -47,7 +39,6 @@ public class TestSuiteGeneral extends BaseTest {
                 .initListBO()
                 .createListAndCheckResponseBO()
                 .initBoardBO()
-//                .deleteBoardAndCheckResponseBO2()
         ;
     }
     @Test
@@ -59,7 +50,6 @@ public class TestSuiteGeneral extends BaseTest {
                 .createListAndCheckResponseBO()
                 .updateListAndCheckResponseBO()
                 .initBoardBO()
-//                .deleteBoardAndCheckResponseBO2()
         ;
     }
     @Test
@@ -71,7 +61,6 @@ public class TestSuiteGeneral extends BaseTest {
                 .updateListAndCheckResponseBO()
                 .closeListAndCheckResponseBO()
                 .initBoardBO()
-//                .deleteBoardAndCheckResponseBO2()
         ;
     }
 
@@ -86,7 +75,6 @@ public class TestSuiteGeneral extends BaseTest {
                 .initListBO()
                 .closeListAndCheckResponseBO()
                 .initBoardBO()
-//                .deleteBoardAndCheckResponseBO2()
         ;
     }
 
@@ -99,6 +87,19 @@ public class TestSuiteGeneral extends BaseTest {
                 .initCardBO()
                 .createCardAndCheckResponse()
                 .moveCardToBetweenListsAndCheck()
+        ;
+    }
+
+    @Test
+    public void addAttachmentToCardAndCheckTestBO2() {
+        BoardBO2
+                .createBoardBO2()
+                .initListBO()
+                .createListAndCheckResponseBO()
+                .initCardBO()
+                .createCardAndCheckResponse()
+                .initCardAttachmentBO()
+                .addAttachmentToCard()
         ;
     }
 

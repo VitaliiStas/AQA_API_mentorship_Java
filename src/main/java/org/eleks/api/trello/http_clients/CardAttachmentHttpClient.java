@@ -9,11 +9,12 @@ public class CardAttachmentHttpClient extends BaseHttpClient {
     protected static final String PATH = "/cards/";
     protected static final String PATHAttachments = "/attachments/";
 
-    public CardAttachmentResponse createAttachmentOnCardRequest(String idCard, String attachmentName) {
+    public CardAttachmentResponse createAttachmentOnCardRequest(String idCard, String attachmentName,String attachmentUrl) {
         return BaseHttpClient
                 .createRequestSpecification()
                 .basePath(PATH+idCard+PATHAttachments)
                 .queryParams("name", attachmentName)
+                .queryParams("url", attachmentUrl)
                 .post()
                 .then()
                 .log()

@@ -1,5 +1,6 @@
 package org.eleks.api.trello.bo;
 
+import io.qameta.allure.Step;
 import org.apache.commons.lang3.RandomStringUtils;
 import org.eleks.api.trello.http_clients.ChecklistHttpClient;
 import org.eleks.api.trello.models.requests.Checklist.ChecklistRequest;
@@ -35,7 +36,10 @@ public class ChecklistBO {
         this.idCard = idCard;
     }
 
+    @Step("Return to the card")
+    public CardBO initCardBO(){return new CardBO(); }
 
+    @Step("Create checklist on the card")
     public ChecklistBO createChecklistAndCheckResponse() {
         createChecklist(idCard
                 , "New Test Checklist" + RandomStringUtils.randomAlphabetic(10));
@@ -49,6 +53,7 @@ public class ChecklistBO {
     }
 
     //todo add checking
+    @Step("Add checklistItems on the checklist")
     public ChecklistBO addChecklistItemsAndCheck() {
         String checklistId = getBaseChecklistResponse().getId();
 

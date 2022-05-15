@@ -9,7 +9,7 @@ import org.testng.annotations.Listeners;
 @Listeners(LogListener.class)
 public class BaseTest{
     @AfterMethod
-    @Step("Close the browser")
+    @Step("Remove tested board")
     public void deleteBoard() {
        new BoardHttpClient()
                .deleteBoardRequest(BoardBO2.getCreateBoardResponse().getId());

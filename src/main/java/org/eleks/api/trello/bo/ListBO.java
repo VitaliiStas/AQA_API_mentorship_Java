@@ -22,11 +22,12 @@ public class ListBO {
         this.boardID = boardID;
     }
 
-
+    @Step("Return to the board")
     public BoardBO2 initBoardBO() {
         return new BoardBO2();
     }
 
+    @Step("Go to the Card")
     public CardBO initCardBO() {
         return new CardBO(getBaseListResponse().getId());
     }
@@ -55,7 +56,7 @@ public class ListBO {
         updateList(getBaseListResponse().getId(), listRequest);
         return new ListBO();
     }
-
+    @Step("Close list on the board")
     public ListBO closeListAndCheckResponseBO() {
         ListRequest listResponse = new ListRequest();
         listResponse.setName("Updated Name");
@@ -66,7 +67,7 @@ public class ListBO {
         return new ListBO();
     }
 
-
+    @Step("Create list on the board")
     public ListBO createListAndCheckResponseBO() {
         createList(boardID);
 
@@ -79,6 +80,7 @@ public class ListBO {
     }
 
     //todo updateList
+    @Step("Update list on the board")
     private ListRequest updateList(String id, ListRequest requestBody) {
 
         ListRequest request = listHttpClient.updateListRequest(id, requestBody);
@@ -91,7 +93,7 @@ public class ListBO {
         return request;
     }
 
-    public static ListResponse getBaseListResponse() {
+    private static ListResponse getBaseListResponse() {
         return baseListResponse.get();
     }
 
@@ -103,12 +105,10 @@ public class ListBO {
         return getListById(getBaseListResponse().getId());
     }
 
-    @Step("Get List by ID")
     private ListResponse getListById(String iD) {
         return listHttpClient.getListRequest(iD);
     }
 
-    @Step("Create List")
     private ListBO createList(String boardID) {
 //        ListResponse listResponse = listHttpClient
 //        return new ListBO( listHttpClient

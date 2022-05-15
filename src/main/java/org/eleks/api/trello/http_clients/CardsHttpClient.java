@@ -57,4 +57,5 @@ public class CardsHttpClient extends BaseHttpClient {
                 .as(CardsRequest.class);
     }
 
+
 }

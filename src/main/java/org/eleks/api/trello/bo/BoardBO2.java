@@ -1,11 +1,9 @@
 package org.eleks.api.trello.bo;
 
-import com.fasterxml.jackson.databind.exc.MismatchedInputException;
 import io.qameta.allure.Step;
 import org.apache.commons.lang3.RandomStringUtils;
 import org.eleks.api.trello.http_clients.BoardHttpClient;
 import org.eleks.api.trello.http_clients.BoardLableHttpClient;
-import org.eleks.api.trello.http_clients.GetAllListHttpClient;
 import org.eleks.api.trello.models.requests.BaseBoardRequest;
 import org.eleks.api.trello.models.requests.BoardBodyBuilder;
 import org.eleks.api.trello.models.requests.board_request_nested_objects.LabelNames;
@@ -35,7 +33,6 @@ public class BoardBO2 {
     public BoardBO2 createLabelOnBoardAndCheckResponseBO2() {
         String boardID = getCreateBoardResponse().getId();
         BaseBoardResponse labelNames = addBoardLabel(boardID, "LabelName", colors.get(1));
-
 
         assertThat(labelNames)
                 .isNotNull()
@@ -113,17 +110,19 @@ public class BoardBO2 {
     public BoardBO2 deleteBoardAndCheckResponseBO2() {
         Assert.assertEquals(boardHttpClient
                 .deleteBoardRequest(getCreateBoardResponse().getId())
-//                .deleteBoardRequest(createResponse.getId())
                 .get_value(), new DeleteBoardResponse()
                 .get_value(), "ListResponse mismatch");
         return this;
     }
 
     //todo createBoardBO2() should be only static
+
     @Step("Create board")
-    public static BoardBO2 createBoardBO2() {
+    public BoardBO2 createBoardBO2() {
+
         BaseBoardResponse baseBoardResponse = boardHttpClient
                 .createBoardRequest("Board" + RandomStringUtils.randomAlphabetic(10));
+
         return new BoardBO2(baseBoardResponse);
     }
 
@@ -134,7 +133,7 @@ public class BoardBO2 {
         createBoardResponse.set(boardResponse);
     }
 
-    public static BaseBoardResponse getCreateBoardResponse() {
+    public BaseBoardResponse getCreateBoardResponse() {
         return createBoardResponse.get();
     }
 

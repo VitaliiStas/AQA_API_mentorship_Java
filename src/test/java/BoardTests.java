@@ -15,7 +15,7 @@ public class BoardTests extends BaseTest {
 
     @Test
     public void updateBoardTestBO2() {
-        BoardBO2
+       new BoardBO2()
                 .createBoardBO2()
                 .updateBoardAndCheckResponseBO2()
 //                .deleteBoardAndCheckResponseBO2()
@@ -24,7 +24,7 @@ public class BoardTests extends BaseTest {
 
     @Test
     public void getBoardByIdTestBO2() {
-        BoardBO2
+        new BoardBO2()
                 .createBoardBO2()
                 .getBoardByIdAndCheckResponseBO2()
 //                .deleteBoardAndCheckResponseBO2()
@@ -33,7 +33,7 @@ public class BoardTests extends BaseTest {
 
     @Test
     public void createLabelOnBoardAndCheckResponseTestBO2() {
-        BoardBO2
+        new BoardBO2()
                 .createBoardBO2()
                 .createLabelOnBoardAndCheckResponseBO2()
 //                .deleteBoardAndCheckResponseBO2()

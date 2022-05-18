@@ -10,7 +10,7 @@ public class TestSuiteGeneral extends BaseTest {
 
     @Test
     public void updateBoardTestBO2() {
-        BoardBO2
+        new BoardBO2()
                 .createBoardBO2()
                 .updateBoardAndCheckResponseBO2()
                 ;
@@ -18,7 +18,7 @@ public class TestSuiteGeneral extends BaseTest {
 
     @Test
     public void getBoardByIdTestBO2() {
-        BoardBO2
+        new BoardBO2()
                 .createBoardBO2()
                 .getBoardByIdAndCheckResponseBO2()
         ;
@@ -26,7 +26,7 @@ public class TestSuiteGeneral extends BaseTest {
 
     @Test
     public void createLabelOnBoardAndCheckResponseTestBO2() {
-        BoardBO2
+        new BoardBO2()
                 .createBoardBO2()
                 .createLabelOnBoardAndCheckResponseBO2()
         ;
@@ -34,7 +34,7 @@ public class TestSuiteGeneral extends BaseTest {
 
     @Test
     public void createListOnBoardAndCheckResponseTestBO2() {
-        BoardBO2
+        new BoardBO2()
                 .createBoardBO2()
                 .initListBO()
                 .createListAndCheckResponseBO()
@@ -43,9 +43,8 @@ public class TestSuiteGeneral extends BaseTest {
     }
     @Test
     public void updateListOnBoardAndCheckResponseTestBO2() {
-        BoardBO2
+        new BoardBO2()
                 .createBoardBO2()
-//                todo use initListBO
                 .initListBO()
                 .createListAndCheckResponseBO()
                 .updateListAndCheckResponseBO()
@@ -54,7 +53,7 @@ public class TestSuiteGeneral extends BaseTest {
     }
     @Test
     public void closeListOnBoardAndCheckResponseTestBO2() {
-        BoardBO2
+        new BoardBO2()
                 .createBoardBO2()
                 .initListBO()
                 .createListAndCheckResponseBO()
@@ -66,7 +65,7 @@ public class TestSuiteGeneral extends BaseTest {
 
     @Test
     public void createNewCardAndCheckResponseTestBO2() {
-        BoardBO2
+        new BoardBO2()
                 .createBoardBO2()
                 .initListBO()
                 .createListAndCheckResponseBO()
@@ -80,7 +79,7 @@ public class TestSuiteGeneral extends BaseTest {
 
     @Test
     public void moveCardBetweenListsAndCheckTestBO2() {
-        BoardBO2
+        new BoardBO2()
                 .createBoardBO2()
                 .initListBO()
                 .createListAndCheckResponseBO()
@@ -92,7 +91,7 @@ public class TestSuiteGeneral extends BaseTest {
 
     @Test
     public void addAttachmentToCardAndCheckTestBO2() {
-        BoardBO2
+        new BoardBO2()
                 .createBoardBO2()
                 .initListBO()
                 .createListAndCheckResponseBO()

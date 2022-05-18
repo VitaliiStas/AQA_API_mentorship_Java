@@ -8,7 +8,7 @@ public class CustomTestSuit extends BaseTest {
 
     @Test
     public void addAttachmentToCardAndCheckTestBO2() {
-        BoardBO2
+        new BoardBO2()
                 .createBoardBO2()
                 .initListBO()
                 .createListAndCheckResponseBO()
@@ -21,7 +21,7 @@ public class CustomTestSuit extends BaseTest {
 
     @Test
     public void addAttachmentAndChecklist() {
-        BoardBO2
+        new BoardBO2()
                 .createBoardBO2()
                 .initListBO()
                 .createListAndCheckResponseBO()
@@ -38,7 +38,7 @@ public class CustomTestSuit extends BaseTest {
 
     @Test
     public void checkRemovingCard() {
-        BoardBO2
+        new BoardBO2()
                 .createBoardBO2()
                 .initListBO()
                 .createListAndCheckResponseBO()
@@ -50,7 +50,7 @@ public class CustomTestSuit extends BaseTest {
 
     @Test
     public void checkRemovingCardWithAttachmentAndChecklist() {
-        BoardBO2
+        new BoardBO2()
                 .createBoardBO2()
                 .initListBO()
                 .createListAndCheckResponseBO()
@@ -68,7 +68,7 @@ public class CustomTestSuit extends BaseTest {
 
     @Test
     public void checkAllRemoving() {
-        BoardBO2
+        new BoardBO2()
                 .createBoardBO2()
                 .initListBO()
                 .createListAndCheckResponseBO()
@@ -90,7 +90,7 @@ public class CustomTestSuit extends BaseTest {
 
     @Test
     public void smokeTest() {
-        BoardBO2
+        new BoardBO2()
                 .createBoardBO2()
                 .initListBO()
                 .createListAndCheckResponseBO()

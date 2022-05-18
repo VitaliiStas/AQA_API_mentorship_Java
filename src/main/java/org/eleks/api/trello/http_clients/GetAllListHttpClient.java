@@ -2,21 +2,23 @@ package org.eleks.api.trello.http_clients;
 
 import org.eleks.api.trello.models.responses.GetAllListsOnBoard.GetAllListResponseItem;
 
+import java.util.ArrayList;
 import java.util.List;
 
 public class GetAllListHttpClient extends BoardHttpClient {
-/*This method deserialize Array JSON into the list of the JSON object
-* */
-    public List<GetAllListResponseItem> getAllListsFromBoard (String boardId){
+    /*This method deserialize Array JSON into the list of the JSON object
+     * */
+    public List<GetAllListResponseItem> getAllListsFromBoard(String boardId) {
 
-        List<GetAllListResponseItem> listResponses = BaseHttpClient.createRequestSpecification()
-                .get(PATH + boardId+"/lists")
+        return new ArrayList<GetAllListResponseItem>(BaseHttpClient
+                .createRequestSpecification()
+                .get(PATH + boardId + "/lists")
                 .then()
                 .log()
                 .all()
                 .extract()
-                .body().jsonPath().getList(".",GetAllListResponseItem.class)
-                ;
-        return listResponses;
+                .body()
+                .jsonPath()
+                .getList(".", GetAllListResponseItem.class));
     }
 }

@@ -7,7 +7,7 @@ import org.testng.annotations.Test;
 public class ListTest extends BaseTest {
     @Test
     public void createLabelOnBoardAndCheckResponseTestBO2() {
-        BoardBO2
+        new BoardBO2()
                 .createBoardBO2()
                 .createLabelOnBoardAndCheckResponseBO2()
 //                .deleteBoardAndCheckResponseBO2()
@@ -16,7 +16,7 @@ public class ListTest extends BaseTest {
 
     @Test
     public void createListOnBoardAndCheckResponseTestBO2() {
-        BoardBO2
+        new BoardBO2()
                 .createBoardBO2()
                 .initListBO()
                 .createListAndCheckResponseBO()
@@ -26,9 +26,8 @@ public class ListTest extends BaseTest {
     }
     @Test
     public void updateListOnBoardAndCheckResponseTestBO2() {
-        BoardBO2
+        new BoardBO2()
                 .createBoardBO2()
-//                todo use initListBO
                 .initListBO()
                 .createListAndCheckResponseBO()
                 .updateListAndCheckResponseBO()
@@ -38,7 +37,7 @@ public class ListTest extends BaseTest {
     }
     @Test
     public void closeListOnBoardAndCheckResponseTestBO2() {
-        BoardBO2
+        new BoardBO2()
                 .createBoardBO2()
                 .initListBO()
                 .createListAndCheckResponseBO()

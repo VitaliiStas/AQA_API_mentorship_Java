@@ -66,7 +66,7 @@ From this map I'm extracting
         HashMap<String, String> idsMap = new HashMap<>();
 
         getAllListHttpClient
-                .getAllListsFromBoard(BoardBO2.getCreateBoardResponse().getId())
+                .getAllListsFromBoard(new BoardBO2().getCreateBoardResponse().getId())
                 .forEach(x -> idsMap.put(x.getName(), x.getId()));
         return idsMap;
     }

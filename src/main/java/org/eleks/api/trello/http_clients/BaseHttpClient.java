@@ -2,6 +2,7 @@ package org.eleks.api.trello.http_clients;
 
 import io.qameta.allure.Step;
 import io.restassured.http.ContentType;
+import io.restassured.response.Response;
 import io.restassured.specification.RequestSpecification;
 
 import static io.restassured.RestAssured.given;
@@ -19,6 +20,16 @@ public abstract class BaseHttpClient {
                 .queryParam("key", APIKEY)
                 .queryParam("token", TOKEN);
 
+    }
+//This function use generics for using diff pojo(response) classes.
+// Also after CRUD type added response logs
+    protected <T> T parsResponse(Response response, Class<T> classType){
+        return   response
+                .then()
+                .log()
+                .all()
+                .extract()
+                .as(classType);
     }
 
 

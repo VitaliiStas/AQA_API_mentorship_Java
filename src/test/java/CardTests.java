@@ -7,7 +7,7 @@ import org.testng.annotations.Test;
 public class CardTests extends BaseTest {
     @Test
     public void createNewCardAndCheckResponseTestBO2() {
-        BoardBO2
+        new BoardBO2()
                 .createBoardBO2()
                 .initListBO()
                 .createListAndCheckResponseBO()
@@ -18,7 +18,7 @@ public class CardTests extends BaseTest {
 
     @Test
     public void updateCardAndCheckResponseTestBO2() {
-        BoardBO2
+        new BoardBO2()
                 .createBoardBO2()
                 .initListBO()
                 .createListAndCheckResponseBO()
@@ -29,7 +29,7 @@ public class CardTests extends BaseTest {
     }
     @Test
     public void getCardAndCheckResponseTestBO2() {
-        BoardBO2
+        new BoardBO2()
                 .createBoardBO2()
                 .initListBO()
                 .createListAndCheckResponseBO()
@@ -41,7 +41,7 @@ public class CardTests extends BaseTest {
     }
     @Test
     public void deleteCardAndCheckResponseTestBO2() {
-        BoardBO2
+        new BoardBO2()
                 .createBoardBO2()
                 .initListBO()
                 .createListAndCheckResponseBO()
@@ -53,7 +53,7 @@ public class CardTests extends BaseTest {
 //    todo added
     @Test
     public void moveCardBetweenListsAndCheckTestBO2() {
-        BoardBO2
+        new BoardBO2()
                 .createBoardBO2()
                 .initListBO()
                 .createListAndCheckResponseBO()
@@ -65,7 +65,7 @@ public class CardTests extends BaseTest {
 
     @Test
     public void addChecklistToCardAndCheckResponseTestBO2() {
-        BoardBO2
+        new BoardBO2()
                 .createBoardBO2()
                 .initListBO()
                 .createListAndCheckResponseBO()
@@ -78,7 +78,7 @@ public class CardTests extends BaseTest {
 
     @Test
     public void addChecklistItemsToCardAndCheckTestBO2() {
-        BoardBO2
+        new BoardBO2()
                 .createBoardBO2()
                 .initListBO()
                 .createListAndCheckResponseBO()
@@ -91,7 +91,7 @@ public class CardTests extends BaseTest {
     }
     @Test
     public void addAttachmentToCardAndCheckTestBO2() {
-        BoardBO2
+        new BoardBO2()
                 .createBoardBO2()
                 .initListBO()
                 .createListAndCheckResponseBO()

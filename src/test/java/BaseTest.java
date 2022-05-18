@@ -12,6 +12,7 @@ public class BaseTest{
     @Step("Remove tested board")
     public void deleteBoard() {
        new BoardHttpClient()
-               .deleteBoardRequest(BoardBO2.getCreateBoardResponse().getId());
+               .deleteBoardRequest(new BoardBO2().getCreateBoardResponse().getId());
+//               .deleteBoardRequest(BoardBO2.getCreateBoardResponse().getId());
     }
 }

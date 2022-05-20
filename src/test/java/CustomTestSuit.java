@@ -1,4 +1,4 @@
-import org.eleks.api.trello.bo.BoardBO2;
+import org.eleks.api.trello.bo.BoTestPreconditions;
 import org.eleks.api.trello.listeners.LogListener;
 import org.testng.annotations.Listeners;
 import org.testng.annotations.Test;
@@ -8,12 +8,9 @@ public class CustomTestSuit extends BaseTest {
 
     @Test
     public void addAttachmentToCardAndCheckTestBO2() {
-        new BoardBO2()
-                .createBoardBO2()
-                .initListBO()
-                .createListAndCheckResponseBO()
-                .initCardBO()
-                .createCardAndCheckResponse()
+        new BoTestPreconditions()
+                .createCardPreconditions()
+
                 .initCardAttachmentBO()
                 .addAttachmentToCard()
         ;
@@ -21,64 +18,36 @@ public class CustomTestSuit extends BaseTest {
 
     @Test
     public void addAttachmentAndChecklist() {
-        new BoardBO2()
-                .createBoardBO2()
-                .initListBO()
-                .createListAndCheckResponseBO()
-                .initCardBO()
-                .createCardAndCheckResponse()
-                .initCardAttachmentBO()
-                .addAttachmentToCard()
-                .initCardBO()
-                .initChecklistBO()
-                .createChecklistAndCheckResponse()
-                .addChecklistItemsAndCheck()
+        new BoTestPreconditions()
+                .createCardWithAttachmentPreconditions()
         ;
     }
 
     @Test
     public void checkRemovingCard() {
-        new BoardBO2()
-                .createBoardBO2()
-                .initListBO()
-                .createListAndCheckResponseBO()
-                .initCardBO()
-                .createCardAndCheckResponse()
+        new BoTestPreconditions()
+        .createCardPreconditions()
+
                 .deleteCardAndCheckResponse();
         ;
     }
 
     @Test
     public void checkRemovingCardWithAttachmentAndChecklist() {
-        new BoardBO2()
-                .createBoardBO2()
-                .initListBO()
-                .createListAndCheckResponseBO()
-                .initCardBO()
-                .createCardAndCheckResponse()
-                .initChecklistBO()
-                .createChecklistAndCheckResponse()
-                .initCardBO()
-                .initCardAttachmentBO()
-                .addAttachmentToCard()
+        new BoTestPreconditions()
+                .createCardChecklistChecklistItemsAttachmentPreconditions()
+
                 .initCardBO()
                 .deleteCardAndCheckResponse();
         ;
+
     }
 
-    @Test
+
     public void checkAllRemoving() {
-        new BoardBO2()
-                .createBoardBO2()
-                .initListBO()
-                .createListAndCheckResponseBO()
-                .initCardBO()
-                .createCardAndCheckResponse()
-                .initChecklistBO()
-                .createChecklistAndCheckResponse()
-                .initCardBO()
-                .initCardAttachmentBO()
-                .addAttachmentToCard()
+        new BoTestPreconditions()
+                .createCardWithAttachmentPreconditions()
+
                 .deleteAttachmentOnCard()
                 .initCardBO()
                 .deleteCardAndCheckResponse()
@@ -88,50 +57,4 @@ public class CustomTestSuit extends BaseTest {
     }
 
 
-    @Test
-    public void smokeTest() {
-        new BoardBO2()
-                .createBoardBO2()
-                .initListBO()
-                .createListAndCheckResponseBO()
-                .initCardBO()
-                .createCardAndCheckResponse()
-                .moveCardToBetweenListsAndCheck()
-                .updateCardAndCheckResponse()
-                .moveCardToBetweenListsAndCheck()
-                .updateCardAndCheckResponse()
-                .initCardAttachmentBO()
-                .addAttachmentToCard()
-                .initCardBO()
-                .updateCardAndCheckResponse()
-                .initChecklistBO()
-                .createChecklistAndCheckResponse()
-                .addChecklistItemsAndCheck()
-                .initCardBO()
-                .deleteCardAndCheckResponse()
-                .createCardAndCheckResponse()
-                .initListBO()
-                .closeListAndCheckResponseBO()
-                .initBoardBO()
-                .deleteBoardAndCheckResponseBO2()
-                .createBoardBO2()
-                .initListBO()
-                .createListAndCheckResponseBO()
-                .updateListAndCheckResponseBO()
-                .initCardBO()
-                .createCardAndCheckResponse()
-                .updateCardAndCheckResponse()
-                .initChecklistBO()
-                .createChecklistAndCheckResponse()
-                .addChecklistItemsAndCheck()
-                .initCardBO()
-                .initCardAttachmentBO()
-                .addAttachmentToCard()
-                .initCardBO()
-                .deleteCardAndCheckResponse()
-                .initListBO()
-                .closeListAndCheckResponseBO()
-                .initBoardBO()
-        ;
-    }
 }

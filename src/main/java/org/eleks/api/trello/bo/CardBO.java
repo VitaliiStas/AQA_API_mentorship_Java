@@ -2,6 +2,7 @@ package org.eleks.api.trello.bo;
 
 import io.qameta.allure.Step;
 import org.apache.commons.lang3.RandomStringUtils;
+import org.eleks.api.trello.bo.board.BoardBO2;
 import org.eleks.api.trello.http_clients.CardsHttpClient;
 import org.eleks.api.trello.http_clients.GetAllListHttpClient;
 import org.eleks.api.trello.models.requests.CardsRequest;

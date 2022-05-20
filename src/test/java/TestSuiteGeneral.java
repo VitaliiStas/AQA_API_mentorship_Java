@@ -1,4 +1,5 @@
-import org.eleks.api.trello.bo.BoardBO2;
+import org.eleks.api.trello.bo.BoTestPreconditions;
+import org.eleks.api.trello.bo.board.BoardBO2;
 import org.eleks.api.trello.listeners.LogListener;
 import org.testng.annotations.Listeners;
 import org.testng.annotations.Test;
@@ -53,50 +54,34 @@ public class TestSuiteGeneral extends BaseTest {
     }
     @Test
     public void closeListOnBoardAndCheckResponseTestBO2() {
-        new BoardBO2()
-                .createBoardBO2()
-                .initListBO()
-                .createListAndCheckResponseBO()
-                .updateListAndCheckResponseBO()
+        new BoTestPreconditions()
+                .createListPreconditions()
+
                 .closeListAndCheckResponseBO()
-                .initBoardBO()
         ;
     }
 
     @Test
     public void createNewCardAndCheckResponseTestBO2() {
-        new BoardBO2()
-                .createBoardBO2()
-                .initListBO()
-                .createListAndCheckResponseBO()
-                .initCardBO()
-                .createCardAndCheckResponse()
-                .initListBO()
-                .closeListAndCheckResponseBO()
-                .initBoardBO()
+        new BoTestPreconditions()
+                .createCardPreconditions()
         ;
     }
 
     @Test
     public void moveCardBetweenListsAndCheckTestBO2() {
-        new BoardBO2()
-                .createBoardBO2()
-                .initListBO()
-                .createListAndCheckResponseBO()
-                .initCardBO()
-                .createCardAndCheckResponse()
+        new BoTestPreconditions()
+                .createCardPreconditions()
+
                 .moveCardToBetweenListsAndCheck()
         ;
     }
 
     @Test
     public void addAttachmentToCardAndCheckTestBO2() {
-        new BoardBO2()
-                .createBoardBO2()
-                .initListBO()
-                .createListAndCheckResponseBO()
-                .initCardBO()
-                .createCardAndCheckResponse()
+        new BoTestPreconditions()
+                .createCardPreconditions()
+
                 .initCardAttachmentBO()
                 .addAttachmentToCard()
         ;

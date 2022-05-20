@@ -1,7 +1,8 @@
-package org.eleks.api.trello.bo;
+package org.eleks.api.trello.bo.board;
 
 import io.qameta.allure.Step;
 import org.apache.commons.lang3.RandomStringUtils;
+import org.eleks.api.trello.bo.ListBO;
 import org.eleks.api.trello.http_clients.BoardHttpClient;
 import org.eleks.api.trello.http_clients.BoardLableHttpClient;
 import org.eleks.api.trello.models.requests.BaseBoardRequest;

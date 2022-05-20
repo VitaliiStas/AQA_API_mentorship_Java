@@ -1,4 +1,4 @@
-import org.eleks.api.trello.bo.BoardBO2;
+import org.eleks.api.trello.bo.BoTestPreconditions;
 import org.eleks.api.trello.listeners.LogListener;
 import org.testng.annotations.Listeners;
 import org.testng.annotations.Test;
@@ -7,70 +7,54 @@ import org.testng.annotations.Test;
 public class CardTests extends BaseTest {
     @Test
     public void createNewCardAndCheckResponseTestBO2() {
-        new BoardBO2()
-                .createBoardBO2()
-                .initListBO()
-                .createListAndCheckResponseBO()
-                .initCardBO()
-                .createCardAndCheckResponse()
+        new BoTestPreconditions()
+                .createCardPreconditions()
         ;
     }
 
     @Test
     public void updateCardAndCheckResponseTestBO2() {
-        new BoardBO2()
-                .createBoardBO2()
-                .initListBO()
-                .createListAndCheckResponseBO()
-                .initCardBO()
-                .createCardAndCheckResponse()
+        new BoTestPreconditions()
+                .createCardPreconditions()
+
                 .updateCardAndCheckResponse()
         ;
     }
+
     @Test
     public void getCardAndCheckResponseTestBO2() {
-        new BoardBO2()
-                .createBoardBO2()
-                .initListBO()
-                .createListAndCheckResponseBO()
-                .initCardBO()
-                .createCardAndCheckResponse()
+        new BoTestPreconditions()
+                .createCardPreconditions()
+
                 .updateCardAndCheckResponse()
                 .getCardAndCheckResponse()
         ;
     }
+
     @Test
     public void deleteCardAndCheckResponseTestBO2() {
-        new BoardBO2()
-                .createBoardBO2()
-                .initListBO()
-                .createListAndCheckResponseBO()
-                .initCardBO()
-                .createCardAndCheckResponse()
+        new BoTestPreconditions()
+                .createCardPreconditions()
+
                 .deleteCardAndCheckResponse()
         ;
     }
-//    todo added
+
+    //    todo added
     @Test
     public void moveCardBetweenListsAndCheckTestBO2() {
-        new BoardBO2()
-                .createBoardBO2()
-                .initListBO()
-                .createListAndCheckResponseBO()
-                .initCardBO()
-                .createCardAndCheckResponse()
+        new BoTestPreconditions()
+                .createCardPreconditions()
+
                 .moveCardToBetweenListsAndCheck()
         ;
     }
 
     @Test
     public void addChecklistToCardAndCheckResponseTestBO2() {
-        new BoardBO2()
-                .createBoardBO2()
-                .initListBO()
-                .createListAndCheckResponseBO()
-                .initCardBO()
-                .createCardAndCheckResponse()
+        new BoTestPreconditions()
+                .createCardPreconditions()
+
                 .initChecklistBO()
                 .createChecklistAndCheckResponse()
         ;
@@ -78,25 +62,20 @@ public class CardTests extends BaseTest {
 
     @Test
     public void addChecklistItemsToCardAndCheckTestBO2() {
-        new BoardBO2()
-                .createBoardBO2()
-                .initListBO()
-                .createListAndCheckResponseBO()
-                .initCardBO()
-                .createCardAndCheckResponse()
+        new BoTestPreconditions()
+                .createCardPreconditions()
+
                 .initChecklistBO()
                 .createChecklistAndCheckResponse()
                 .addChecklistItemsAndCheck()
         ;
     }
+
     @Test
     public void addAttachmentToCardAndCheckTestBO2() {
-        new BoardBO2()
-                .createBoardBO2()
-                .initListBO()
-                .createListAndCheckResponseBO()
-                .initCardBO()
-                .createCardAndCheckResponse()
+        new BoTestPreconditions()
+                .createCardPreconditions()
+
                 .initCardAttachmentBO()
                 .addAttachmentToCard()
         ;

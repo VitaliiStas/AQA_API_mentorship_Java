@@ -32,5 +32,15 @@ public abstract class BaseHttpClient {
                 .as(classType);
     }
 
+    protected <T> T parsResponseAndCheckStatusCode(Response response, Class<T> classType,int statusCode){
+        return   response
+                .then()
+                .log()
+                .all()
+                .statusCode(statusCode)
+                .extract()
+                .as(classType);
+    }
+
 
 }

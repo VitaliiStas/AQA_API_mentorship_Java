@@ -1,7 +1,8 @@
-package org.eleks.api.trello.bo;
+package org.eleks.api.trello.bo.board;
 
 import io.qameta.allure.Step;
 import org.apache.commons.lang3.RandomStringUtils;
+import org.eleks.api.trello.bo.ListBO;
 import org.eleks.api.trello.http_clients.BoardHttpClient;
 import org.eleks.api.trello.http_clients.BoardLableHttpClient;
 import org.eleks.api.trello.models.requests.BaseBoardRequest;
@@ -11,14 +12,11 @@ import org.eleks.api.trello.models.responses.BaseBoardResponse;
 import org.eleks.api.trello.models.responses.DeleteBoardResponse;
 import org.testng.Assert;
 
-import java.util.Arrays;
-import java.util.List;
+import java.util.*;
 
 import static org.assertj.core.api.Assertions.assertThat;
 
 public class BoardBO2 {
-    //todo static createResponse2 should be wrapped in thread local, it should be set in the default constructor BoardBO2
-//    private BaseBoardResponse createResponse;
     private static ThreadLocal<BaseBoardResponse> createBoardResponse = new ThreadLocal<>();
     private static BoardHttpClient boardHttpClient = new BoardHttpClient();
 
@@ -26,28 +24,23 @@ public class BoardBO2 {
             Arrays.asList("blue", "black", "red", "green", "purple", "orange", "yellow");
 
 
-    //todo new method initListBO(){
-
+    @Step("Go to the list")
     public ListBO initListBO() {
         return new ListBO(getCreateBoardResponse().getId());
     }
-//        return new ListBO(createResponse.getId());
-//    }
 
 
-    //    todo how to compare two diff JSON?? or how to create map from
+    //    todo how to compare two diff JSON?? or how to create map from, now check only Black label
     public BoardBO2 createLabelOnBoardAndCheckResponseBO2() {
-//        String boardID = createResponse.getId();
         String boardID = getCreateBoardResponse().getId();
         BaseBoardResponse labelNames = addBoardLabel(boardID, "LabelName", colors.get(1));
-//        boardHttpClient.getBoardByIdRequest(boardID).getLabelNames();
-
 
         assertThat(labelNames)
                 .isNotNull()
                 .usingRecursiveComparison()
                 .ignoringFields("labelNames", "color", "name", "id", "desc", "prefs")
                 .isEqualTo(boardHttpClient.getBoardByIdRequest(boardID).getLabelNames().getBlack())
+
 //todo diff json how to create check properly??
         ;
 //        {
@@ -79,7 +72,6 @@ public class BoardBO2 {
     public BoardBO2 getBoardByIdAndCheckResponseBO2() {
         BaseBoardResponse baseBoardResponse = boardHttpClient.getBoardByIdRequest(
                 getCreateBoardResponse().getId());
-//                createResponse.getId());
 
         assertThat(baseBoardResponse)
                 .isNotNull()
@@ -103,7 +95,6 @@ public class BoardBO2 {
 
         BaseBoardResponse baseBoardResponse = boardHttpClient.updateBoard(
                 getCreateBoardResponse().getId(), baseBoardRequest);
-//                createResponse.getId(), baseBoardRequest);
 
         assertThat(baseBoardResponse)
                 .isNotNull()
@@ -117,39 +108,33 @@ public class BoardBO2 {
     }
 
     @Step("Delete created/updated board")
-    public void deleteBoardAndCheckResponseBO2() {
+    public BoardBO2 deleteBoardAndCheckResponseBO2() {
         Assert.assertEquals(boardHttpClient
                 .deleteBoardRequest(getCreateBoardResponse().getId())
-//                .deleteBoardRequest(createResponse.getId())
                 .get_value(), new DeleteBoardResponse()
                 .get_value(), "ListResponse mismatch");
-
+        return this;
     }
 
     //todo createBoardBO2() should be only static
+
     @Step("Create board")
-    public static BoardBO2 createBoardBO2() {
+    public BoardBO2 createBoardBO2() {
+
         BaseBoardResponse baseBoardResponse = boardHttpClient
                 .createBoardRequest("Board" + RandomStringUtils.randomAlphabetic(10));
+
         return new BoardBO2(baseBoardResponse);
     }
-//    private void setCreateResponse(BaseBoardResponse createResponse) {
-//        this.createResponse = createResponse;
-//    }
 
-    //todo maybe doesn't work?????
     public BoardBO2() {
     }
 
     public BoardBO2(BaseBoardResponse boardResponse) {
-        setResponse(boardResponse);
+        createBoardResponse.set(boardResponse);
     }
 
-    private static void setResponse(BaseBoardResponse response) {
-        createBoardResponse.set(response);
-    }
-
-    public static BaseBoardResponse getCreateBoardResponse() {
+    public BaseBoardResponse getCreateBoardResponse() {
         return createBoardResponse.get();
     }
 
@@ -168,7 +153,6 @@ public class BoardBO2 {
 
     private BoardBO2 addAllBoardLabelsBO2() {
         addAllBoardLabels(getCreateBoardResponse().getId());
-//        addAllBoardLabels(createResponse.getId());
         return new BoardBO2();
     }
 

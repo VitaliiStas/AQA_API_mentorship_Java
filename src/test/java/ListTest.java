@@ -1,4 +1,5 @@
-import org.eleks.api.trello.bo.BoardBO2;
+import org.eleks.api.trello.bo.BoTestPreconditions;
+import org.eleks.api.trello.bo.board.BoardBO2;
 import org.eleks.api.trello.listeners.LogListener;
 import org.testng.annotations.Listeners;
 import org.testng.annotations.Test;
@@ -7,45 +8,32 @@ import org.testng.annotations.Test;
 public class ListTest extends BaseTest {
     @Test
     public void createLabelOnBoardAndCheckResponseTestBO2() {
-        BoardBO2
+        new BoardBO2()
                 .createBoardBO2()
                 .createLabelOnBoardAndCheckResponseBO2()
-//                .deleteBoardAndCheckResponseBO2()
         ;
     }
 
     @Test
     public void createListOnBoardAndCheckResponseTestBO2() {
-        BoardBO2
-                .createBoardBO2()
-                .initListBO()
-                .createListAndCheckResponseBO()
-                .initBoardBO()
-//                .deleteBoardAndCheckResponseBO2()
+        new BoTestPreconditions().
+        createListPreconditions()
         ;
     }
     @Test
     public void updateListOnBoardAndCheckResponseTestBO2() {
-        BoardBO2
-                .createBoardBO2()
-//                todo use initListBO
-                .initListBO()
-                .createListAndCheckResponseBO()
+        new BoTestPreconditions().
+                createListPreconditions()
+
                 .updateListAndCheckResponseBO()
-                .initBoardBO()
-//                .deleteBoardAndCheckResponseBO2()
         ;
     }
     @Test
     public void closeListOnBoardAndCheckResponseTestBO2() {
-        BoardBO2
-                .createBoardBO2()
-                .initListBO()
-                .createListAndCheckResponseBO()
-                .updateListAndCheckResponseBO()
+        new BoTestPreconditions().
+                createListPreconditions()
+
                 .closeListAndCheckResponseBO()
-                .initBoardBO()
-//                .deleteBoardAndCheckResponseBO2()
         ;
     }
 }

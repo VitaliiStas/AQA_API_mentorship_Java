@@ -81,14 +81,17 @@ From this map I'm extracting
     public CardBO(String listID) {
         this.listID = listID;
     }
+
     @Step("Return to the list")
     public ListBO initListBO() {
         return new ListBO();
     }
+
     @Step("Go to the checklist")
     public ChecklistBO initChecklistBO() {
         return new ChecklistBO(getBaseCardResponse().getId());
     }
+
     @Step("Go to the attachment")
     public CardAttachmentBO initCardAttachmentBO() {
         return new CardAttachmentBO(getBaseCardResponse().getId());

@@ -12,6 +12,8 @@
             <class name="ListTest"></class>
             <class name="CustomTestSuit"></class>
             <class name="TestSuiteGeneral"></class>
+
+            <class name="NegativeTests"></class>
         </classes>
     </test>
 </suite>

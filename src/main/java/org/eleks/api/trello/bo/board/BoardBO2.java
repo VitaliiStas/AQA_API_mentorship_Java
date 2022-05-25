@@ -166,13 +166,14 @@ public class BoardBO2 {
         return new BoardBO2();
     }
 
-    @Step("Create board with incorrect URL(bogus path)")
+    @Step("Create board with false APIKEY")
     public BoardBO2 createBoardWithStatusCode401() {
         boardHttpClient
                 .createBoardWithInvalidAPIKEY("bogus board",401);
 
         return new BoardBO2();
     }
+
 
 
     public BoardBO2() {

@@ -84,6 +84,18 @@ public class BoardHttpClient extends BaseHttpClient {
 
         parsResponseAndCheckStatusCode(response, expectedStatusCode);
     }
+    public void createBoardWithInvalidTOKEN(String boardName,int expectedStatusCode) {
+        BaseBoardRequest createBoardRequest = new BaseBoardRequest();
+        createBoardRequest.setName(boardName);
+
+        Response response = BaseHttpClient
+                .createRequestWithInvalidTOKEN()
+                .body(createBoardRequest)
+                .basePath(PATH)
+                .post();
+
+        parsResponseAndCheckStatusCode(response, expectedStatusCode);
+    }
 
     @Step("Send get board request/GET")
     public BaseBoardResponse getBoardByIdRequest(String boardId) {

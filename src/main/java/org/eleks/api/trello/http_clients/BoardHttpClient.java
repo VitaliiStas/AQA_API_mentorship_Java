@@ -22,6 +22,20 @@ public class BoardHttpClient extends BaseHttpClient {
 
     }
 
+    public void updateBoardWithStatusCodeCheck(String boardIdForUpdate
+            , BaseBoardRequest requestBody
+            ,String path
+            ,int expectedStatusCode) {
+
+        Response response = BaseHttpClient
+                .createRequestSpecification()
+                .body(requestBody)
+                .put(path + boardIdForUpdate);
+
+         parsResponseAndCheckStatusCode(response, expectedStatusCode);
+
+    }
+
     @Step("Send delete board request/DELETE")
     public DeleteBoardResponse deleteBoardRequest(String boardIdForDelete) {
 
@@ -44,6 +58,43 @@ public class BoardHttpClient extends BaseHttpClient {
                 .post();
 
         return parsResponse(response, BaseBoardResponse.class);
+    }
+    public void createBoardWithStatusCodeCheck(String boardName,String path ,int expectedStatusCode) {
+        BaseBoardRequest createBoardRequest = new BaseBoardRequest();
+        createBoardRequest.setName(boardName);
+
+        Response response = BaseHttpClient
+                .createRequestSpecification()
+                .body(createBoardRequest)
+                .basePath(path)
+                .post();
+
+         parsResponseAndCheckStatusCode(response, expectedStatusCode);
+    }
+
+    public void createBoardWithInvalidAPIKEY(String boardName,int expectedStatusCode) {
+        BaseBoardRequest createBoardRequest = new BaseBoardRequest();
+        createBoardRequest.setName(boardName);
+
+        Response response = BaseHttpClient
+                .createRequestWithInvalidAPIKEY()
+                .body(createBoardRequest)
+                .basePath(PATH)
+                .post();
+
+        parsResponseAndCheckStatusCode(response, expectedStatusCode);
+    }
+    public void createBoardWithInvalidTOKEN(String boardName,int expectedStatusCode) {
+        BaseBoardRequest createBoardRequest = new BaseBoardRequest();
+        createBoardRequest.setName(boardName);
+
+        Response response = BaseHttpClient
+                .createRequestWithInvalidTOKEN()
+                .body(createBoardRequest)
+                .basePath(PATH)
+                .post();
+
+        parsResponseAndCheckStatusCode(response, expectedStatusCode);
     }
 
     @Step("Send get board request/GET")

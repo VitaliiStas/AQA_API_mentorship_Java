@@ -77,7 +77,6 @@ public class BoardBO2 {
                 .isNotNull()
                 .usingRecursiveComparison()
                 .isEqualTo(getCreateBoardResponse());
-//                .isEqualTo(createResponse);
 
         return new BoardBO2();
     }
@@ -101,7 +100,32 @@ public class BoardBO2 {
                 .usingRecursiveComparison()
                 .ignoringFields("id", "prefs", "labelNames")
                 .isEqualTo(boardHttpClient.getBoardByIdRequest(getCreateBoardResponse().getId()));
-//                .isEqualTo(boardHttpClient.getBoardByIdRequest(createResponse.getId()));
+
+        return new BoardBO2();
+
+    }
+
+    public BoardBO2 updateBoardWithStatusCode400() {
+
+        BaseBoardRequest baseBoardRequest = new BoardBodyBuilder()
+                .setName("")
+                .build();
+
+        boardHttpClient.updateBoardWithStatusCodeCheck(
+                getCreateBoardResponse().getId(), baseBoardRequest,"/boards/",400);
+
+        return new BoardBO2();
+
+    }
+
+    public BoardBO2 updateBoardWithStatusCode404() {
+
+        BaseBoardRequest baseBoardRequest = new BoardBodyBuilder()
+                .setName("bogus name")
+                .build();
+
+        boardHttpClient.updateBoardWithStatusCodeCheck(
+                getCreateBoardResponse().getId(), baseBoardRequest,"/bogus/",404);
 
         return new BoardBO2();
 
@@ -116,7 +140,6 @@ public class BoardBO2 {
         return this;
     }
 
-    //todo createBoardBO2() should be only static
 
     @Step("Create board")
     public BoardBO2 createBoardBO2() {
@@ -126,6 +149,32 @@ public class BoardBO2 {
 
         return new BoardBO2(baseBoardResponse);
     }
+
+    @Step("Create board with empty name")
+    public BoardBO2 createBoardWithStatusCode400() {
+       boardHttpClient
+                .createBoardWithStatusCodeCheck("","/boards/",400);
+
+        return new BoardBO2();
+    }
+
+    @Step("Create board with incorrect URL(bogus path)")
+    public BoardBO2 createBoardWithStatusCode404() {
+        boardHttpClient
+                .createBoardWithStatusCodeCheck("bogus board","bogus",404);
+
+        return new BoardBO2();
+    }
+
+    @Step("Create board with false APIKEY")
+    public BoardBO2 createBoardWithStatusCode401() {
+        boardHttpClient
+                .createBoardWithInvalidAPIKEY("bogus board",401);
+
+        return new BoardBO2();
+    }
+
+
 
     public BoardBO2() {
     }

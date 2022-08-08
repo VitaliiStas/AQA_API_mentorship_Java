@@ -3,6 +3,8 @@ import org.eleks.api.trello.listeners.LogListener;
 import org.testng.annotations.Listeners;
 import org.testng.annotations.Test;
 
+import java.nio.file.Files;
+
 @Listeners(LogListener.class)
 public class NegativeTests {
 
@@ -42,6 +44,7 @@ public class NegativeTests {
                 .updateBoardWithStatusCode404()
                 .deleteBoardAndCheckResponseBO2()
         ;
+        Object object = new Object();
     }
 
 }

@@ -49,22 +49,20 @@ public class NegativeTests {
         Object object = new Object();
     }
 
-    SoftAssert softAssert = new SoftAssert();
-    @Test
-    public void defaultFailing1() {
-        softAssert.assertEquals(1,2,"this test all time fails (soft assert 1)");
-    }
-    @Test
-    public void defaultFailing2() {
-        softAssert.assertEquals(1,1,"this test all time fails (soft assert 2)");
-    }
+
+
     @Test
     public void defaultFailing3() {
-        softAssert.assertEquals(1,2,"this test all time fails (soft assert 3)");
+        SoftAssert softAssert = new SoftAssert();
+        softAssert.assertTrue(false);
+        softAssert.assertTrue(false);
+        softAssert.assertEquals(false, true,"failed");
+        softAssert.assertEquals(1, 2,"brokedown");
+        softAssert.assertEquals(0, 1,"brokedown2");
+        softAssert.assertAll();
+
     }
-    @Test
-    public void defaultFailing4() {
-        softAssert.assertEquals(2,2,"this test all time fails (soft assert 4)");
-    }
+
+
 
 }

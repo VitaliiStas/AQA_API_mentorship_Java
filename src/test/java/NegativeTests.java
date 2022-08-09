@@ -3,6 +3,7 @@ import org.eleks.api.trello.listeners.LogListener;
 import org.testng.Assert;
 import org.testng.annotations.Listeners;
 import org.testng.annotations.Test;
+import org.testng.asserts.SoftAssert;
 
 import java.nio.file.Files;
 
@@ -47,21 +48,23 @@ public class NegativeTests {
         ;
         Object object = new Object();
     }
+
+    SoftAssert softAssert = new SoftAssert();
     @Test
     public void defaultFailing1() {
-        Assert.assertEquals(1,2,"this test all time fails");
+        softAssert.assertEquals(1,2,"this test all time fails (soft assert 1)");
     }
     @Test
     public void defaultFailing2() {
-        Assert.assertEquals(1,2,"this test all time fails");
+        softAssert.assertEquals(1,1,"this test all time fails (soft assert 2)");
     }
     @Test
     public void defaultFailing3() {
-        Assert.assertEquals(1,2,"this test all time fails");
+        softAssert.assertEquals(1,2,"this test all time fails (soft assert 3)");
     }
     @Test
     public void defaultFailing4() {
-        Assert.assertEquals(1,2,"this test all time fails");
+        softAssert.assertEquals(2,2,"this test all time fails (soft assert 4)");
     }
 
 }

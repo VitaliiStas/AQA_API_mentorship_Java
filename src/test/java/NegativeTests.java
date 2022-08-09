@@ -48,7 +48,19 @@ public class NegativeTests {
         Object object = new Object();
     }
     @Test
-    public void defaultFailing() {
+    public void defaultFailing1() {
+        Assert.assertEquals(1,2,"this test all time fails");
+    }
+    @Test
+    public void defaultFailing2() {
+        Assert.assertEquals(1,2,"this test all time fails");
+    }
+    @Test
+    public void defaultFailing3() {
+        Assert.assertEquals(1,2,"this test all time fails");
+    }
+    @Test
+    public void defaultFailing4() {
         Assert.assertEquals(1,2,"this test all time fails");
     }
 

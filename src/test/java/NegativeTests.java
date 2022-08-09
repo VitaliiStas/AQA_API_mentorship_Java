@@ -1,5 +1,6 @@
 import org.eleks.api.trello.bo.board.BoardBO2;
 import org.eleks.api.trello.listeners.LogListener;
+import org.testng.Assert;
 import org.testng.annotations.Listeners;
 import org.testng.annotations.Test;
 
@@ -45,6 +46,10 @@ public class NegativeTests {
                 .deleteBoardAndCheckResponseBO2()
         ;
         Object object = new Object();
+    }
+    @Test
+    public void defaultFailing() {
+        Assert.assertEquals(1,2,"this test all time fails");
     }
 
 }

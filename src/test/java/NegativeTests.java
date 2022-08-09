@@ -1,11 +1,8 @@
 import org.eleks.api.trello.bo.board.BoardBO2;
 import org.eleks.api.trello.listeners.LogListener;
-import org.testng.Assert;
 import org.testng.annotations.Listeners;
 import org.testng.annotations.Test;
-import org.testng.asserts.SoftAssert;
 
-import java.nio.file.Files;
 
 @Listeners(LogListener.class)
 public class NegativeTests {

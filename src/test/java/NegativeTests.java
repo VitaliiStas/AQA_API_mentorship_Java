@@ -51,18 +51,18 @@ public class NegativeTests {
 
 
 
-    @Test
-    public void defaultFailing3() {
-        SoftAssert softAssert = new SoftAssert();
-        softAssert.assertTrue(false);
-        softAssert.assertTrue(false);
-        softAssert.assertTrue(false);
-        softAssert.assertEquals(false, true,"failed");
-        softAssert.assertEquals(1, 2,"brokedown");
-        softAssert.assertEquals(0, 1,"brokedown2");
-        softAssert.assertAll();
-
-    }
+//    @Test
+//    public void defaultFailing3() {
+//        SoftAssert softAssert = new SoftAssert();
+//        softAssert.assertTrue(false);
+//        softAssert.assertTrue(false);
+//        softAssert.assertTrue(false);
+//        softAssert.assertEquals(false, true,"failed");
+//        softAssert.assertEquals(1, 2,"brokedown");
+//        softAssert.assertEquals(0, 1,"brokedown2");
+//        softAssert.assertAll();
+//
+//    }
 
 
 

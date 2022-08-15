@@ -1,53 +1,57 @@
 package tasks_for_matrix.xml_task;
 
+import com.fasterxml.jackson.dataformat.xml.annotation.JacksonXmlProperty;
+
 public class Dependency {
-        DependencyNode dependency;
-        @Override
-        public String toString() {
-            return "Dependency{" +
-                    "groupId='" + groupId + '\'' +
-                    ", artifactId='" + artifactId + '\'' +
-                    ", version='" + version + '\'' +
-                    ", scope='" + scope + '\'' +
-                    '}';
-        }
 
-        public String groupId;
-        public String artifactId;
-        public String version;
-        public String scope;
+        @JacksonXmlProperty(localName = "groupId")
+    String groupID;
+        @JacksonXmlProperty(localName = "artifactId")
+    String artifactID;
+        @JacksonXmlProperty(localName = "version")
+    String version;
+        @JacksonXmlProperty(localName = "scope")
+    String scope;
 
+    public String getGroupID() {
+        return groupID;
+    }
 
-        public String getGroupId() {
-            return groupId;
-        }
+    public void setGroupID(String value) {
+        this.groupID = value;
+    }
 
-        public void setGroupId(String groupId) {
-            this.groupId = groupId;
-        }
+    public String getArtifactID() {
+        return artifactID;
+    }
 
-        public String getArtifactId() {
-            return artifactId;
-        }
+    public void setArtifactID(String value) {
+        this.artifactID = value;
+    }
 
-        public void setArtifactId(String artifactId) {
-            this.artifactId = artifactId;
-        }
+    public String getVersion() {
+        return version;
+    }
 
-        public String getVersion() {
-            return version;
-        }
+    public void setVersion(String value) {
+        this.version = value;
+    }
 
-        public void setVersion(String version) {
-            this.version = version;
-        }
+    public String getScope() {
+        return scope;
+    }
 
-        public String getScope() {
-            return scope;
-        }
+    public void setScope(String value) {
+        this.scope = value;
+    }
 
-        public void setScope(String scope) {
-            this.scope = scope;
-        }
-
+    @Override
+    public String toString() {
+        return "Dependency{" +
+                "groupID='" + groupID + '\'' +
+                ", artifactID='" + artifactID + '\'' +
+                ", version='" + version + '\'' +
+                ", scope='" + scope + '\'' +
+                '}';
+    }
 }

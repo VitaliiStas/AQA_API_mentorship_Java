@@ -55,9 +55,10 @@ public class NegativeTests {
         SoftAssert softAssert = new SoftAssert();
         int num = ThreadLocalRandom.current().nextInt(1, 10 + 1);
         System.out.println(num);
-            softAssert.assertEquals(false, false, "soft assert1");
-            softAssert.assertEquals(num%2, 0, "soft assert2");
-            softAssert.assertNotEquals(num%2, 0, "soft assert3");
+        softAssert.assertEquals(false, false, "soft assert1");
+        softAssert.assertEquals(num % 2, 0, "soft assert2");
+        softAssert.assertEquals(num % 2, 0, "soft assert3");
+        softAssert.assertEquals(false, false, "soft assert1");
 
         softAssert.assertAll();
     }
@@ -67,8 +68,8 @@ public class NegativeTests {
         SoftAssert softAssert = new SoftAssert();
         int num = ThreadLocalRandom.current().nextInt(1, 10 + 1);
         System.out.println(num);
-        softAssert.assertEquals(num%2, 0, "soft assert22");
-        softAssert.assertEquals(num%2, 0, "soft assert23");
+        softAssert.assertEquals(num % 2, 0, "soft assert22");
+        softAssert.assertEquals(num % 2, 0, "soft assert23");
         softAssert.assertEquals(true, true, "soft assert21");
 
         softAssert.assertAll();

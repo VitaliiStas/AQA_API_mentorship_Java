@@ -9,7 +9,9 @@ import static io.restassured.RestAssured.given;
 
 public abstract class BaseHttpClient {
 
-    private static final String BASEURL = "https://api.trello.com/1";
+    private static String $host;
+    private static final String BASEURL = $host;
+//    private static final String BASEURL = "https://api.trello.com/1";
     private static final String APIKEY = "9d44432a6247b3a2c1e1288fc23a1865";
 //    private static final String APIKEY = "false";
     private static final String TOKEN = "cf82f9f78e5e09f4ae0dcdaa86cd8341c449c7227157b379f083031a5ce2db15";

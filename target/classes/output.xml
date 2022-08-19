@@ -1,13 +1,13 @@
 <Dependencies>
   <dependency>
-    <groupId>org.assertj</groupId>
+    <groupId>AAAAAAAAAAAAAAAAAAAA</groupId>
     <artifactId>assertj-core</artifactId>
     <version>3.21.0</version>
     <scope>test</scope>
   </dependency>
   <dependency>
     <groupId>io.rest-assured</groupId>
-    <artifactId>rest-assured</artifactId>
+    <artifactId>AAAAAAAAAAAAAAAAAAAA</artifactId>
     <version>4.5.0</version>
     <scope>test</scope>
   </dependency>
@@ -15,12 +15,12 @@
     <groupId>org.testng</groupId>
     <artifactId>testng</artifactId>
     <version>${testng-version}</version>
-    <scope/>
+    <scope>AAAAAAAAAAAAAAAAAAAA</scope>
   </dependency>
   <dependency>
     <groupId>com.aventstack</groupId>
     <artifactId>extentreports</artifactId>
-    <version>${extentreports-version}</version>
+    <version>AAAAAAAAAAAAAAAAAAAA</version>
     <scope/>
   </dependency>
   <dependency>

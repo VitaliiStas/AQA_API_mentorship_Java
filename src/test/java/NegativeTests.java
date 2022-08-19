@@ -2,6 +2,9 @@ import org.eleks.api.trello.bo.board.BoardBO2;
 import org.eleks.api.trello.listeners.LogListener;
 import org.testng.annotations.Listeners;
 import org.testng.annotations.Test;
+import org.testng.asserts.SoftAssert;
+
+import java.util.concurrent.ThreadLocalRandom;
 
 
 @Listeners(LogListener.class)
@@ -20,6 +23,7 @@ public class NegativeTests {
                 .createBoardWithStatusCode404()
         ;
     }
+
     @Test // Negative board test
     public void createBoardWithInvalidAPIKEYTestBO2() {
         new BoardBO2()
@@ -46,10 +50,30 @@ public class NegativeTests {
         Object object = new Object();
     }
 
+    @Test
+    public void softAssert() {
+        SoftAssert softAssert = new SoftAssert();
+        int num = ThreadLocalRandom.current().nextInt(1, 10 + 1);
+        System.out.println(num);
+            softAssert.assertEquals(false, true, "soft assert1");
+            softAssert.assertEquals(num%2, 0, "soft assert2");
+            softAssert.assertNotEquals(num%2, 0, "soft assert3");
 
+        softAssert.assertAll();
+    }
 
+    @Test
+    public void softAssert2() {
+        SoftAssert softAssert = new SoftAssert();
+        int num = ThreadLocalRandom.current().nextInt(1, 10 + 1);
+        System.out.println(num);
+        softAssert.assertEquals(false, true, "soft assert21");
+        softAssert.assertEquals(num%2, 0, "soft assert22");
+        softAssert.assertNotEquals(num%2, 0, "soft assert23");
+        softAssert.assertEquals(true, true, "soft assert21");
 
-
+        softAssert.assertAll();
+    }
 
 
 }

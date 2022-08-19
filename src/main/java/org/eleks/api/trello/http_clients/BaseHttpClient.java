@@ -10,7 +10,7 @@ import static io.restassured.RestAssured.given;
 
 public abstract class BaseHttpClient {
 
-    private static final String BASEURL = PropertyUtils.getProperty("HOST");
+    private static final String BASEURL = PropertyUtils.getProperty("BASE_URL");
     //    private static final String BASEURL = "https://api.trello.com/1";
     private static final String APIKEY = "9d44432a6247b3a2c1e1288fc23a1865";
 //    private static final String APIKEY = "false";

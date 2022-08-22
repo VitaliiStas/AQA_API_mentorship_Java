@@ -52,7 +52,7 @@ public class EmailCollection {
     public static void main(String[] args) {
         EmailCollection emailCollection = new EmailCollection();
         emailCollection.printEmails(getHTMLPage(url),pattern1,pattern2);
-        emailCollection.printEmails(s,pattern1,pattern2);
+//        emailCollection.printEmails(s,pattern1,pattern2);
 
     }
 }

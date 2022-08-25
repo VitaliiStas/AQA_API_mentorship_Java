@@ -9,6 +9,7 @@ import java.util.regex.Pattern;
 public class EmailCollection {
 
     private static final String pattern1 = "[a-zA-Z0-9_.+-]+@[a-zA-Z0-9-]+\\.[a-zA-Z0-9-.]{2,}";
+
     private static final String pattern2 = "[a-zA-Z0-9_.+-]+@[a-zA-Z0-9-]+\\.[a-zA-Z0-9-.]{2,6}";
 
     private static final String s = "apple-touch-icon@2.png, test@gmail.m, test2@gmail.com,apple-touch-icon@2.png, test@gmail.com, test2@gmail.coqweqewwqm,apple-touch-icon@2.pngqweqweqwe, test@gmail.com, test2@gmail.12345678";

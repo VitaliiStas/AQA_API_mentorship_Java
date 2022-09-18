@@ -10,7 +10,7 @@ import java.io.*;
 import java.util.concurrent.ThreadLocalRandom;
 
 public class Log4jAppender {
-    private static final Logger LOGGER = LogManager.getLogger(Log4jAppender.class);
+    private static final Logger LOGGER = LogManager.getLogger(Logger.class);
 
     private static void loggerGenerator() {
         int num = ThreadLocalRandom.current().nextInt(1, 10 + 1);

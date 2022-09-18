@@ -1,0 +1,56 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<Configuration monitorInterval="30">
+    <Properties>
+        <Property name="LOG_CONSOLE_PATTERN">%d{HH:mm:ss,SSS} [%t] %5p %c{1}.%M:%L - %m%n</Property>
+        <Property name="LOG_FILE_PATTERN">%d{HH:mm:ss,SSS dd-MM-yyyy} [%t] %5p %c{1}.%M:%L - %m%n</Property>
+    </Properties>
+
+    <Appenders>
+
+        <Console name="console" target="SYSTEM_OUT">
+            <LevelRangeFilter minLevel="FATAL" maxLevel="INFO" onMatch="ACCEPT" onMismatch="DENY"/>
+            <PatternLayout pattern="${LOG_CONSOLE_PATTERN}"/>
+        </Console>
+
+        <File name="file" fileName="logs/app.log">
+            <PatternLayout pattern="${LOG_PATTERN}"/>
+        </File>
+
+<!--        <Slack name="slack"-->
+<!--               channel="#logs"-->
+<!--               webhookUrl="https://hooks.slack.com/services/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"-->
+<!--               username="log_bot">-->
+<!--            <SlackLogLayout />-->
+<!--        </Slack>-->
+
+        <JDBC name="db_appender" tableName="logs">
+            <LevelRangeFilter minLevel="ERROR" maxLevel="WARN" onMatch="ACCEPT" onMismatch="DENY"/>
+            <ConnectionFactory class="tasks_for_matrix.ConnectionFactory" method="getDatabaseConnection" />
+            <Column name="date_time" isEventTimestamp="true" />
+            <Column name="level" pattern="%level" />
+            <Column name="message" pattern="%message" />
+        </JDBC>
+
+    </Appenders>
+
+    <Loggers>
+        <Root level="all">
+            <AppenderRef ref="console"/>
+            <AppenderRef ref="file"/>
+<!--            <AppenderRef ref="slack" level="fatal"/>-->
+            <AppenderRef ref="db_appender"/>
+        </Root>
+
+        <Logger name="file" additivity="false">
+            <AppenderRef ref="file"/>
+        </Logger>
+
+        <Logger name="console" additivity="false">
+            <AppenderRef ref="console"/>
+        </Logger>
+
+        <Logger name="db_appender" additivity="false">
+            <AppenderRef ref="db_appender"/>
+        </Logger>
+    </Loggers>
+</Configuration>

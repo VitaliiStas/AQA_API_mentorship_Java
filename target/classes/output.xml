@@ -1,0 +1,32 @@
+<Dependencies>
+  <dependency>
+    <groupId>AAAAAAAAAAAAAAAAAAAA</groupId>
+    <artifactId>assertj-core</artifactId>
+    <version>3.21.0</version>
+    <scope>test</scope>
+  </dependency>
+  <dependency>
+    <groupId>io.rest-assured</groupId>
+    <artifactId>AAAAAAAAAAAAAAAAAAAA</artifactId>
+    <version>4.5.0</version>
+    <scope>test</scope>
+  </dependency>
+  <dependency>
+    <groupId>org.testng</groupId>
+    <artifactId>testng</artifactId>
+    <version>${testng-version}</version>
+    <scope>AAAAAAAAAAAAAAAAAAAA</scope>
+  </dependency>
+  <dependency>
+    <groupId>com.aventstack</groupId>
+    <artifactId>extentreports</artifactId>
+    <version>AAAAAAAAAAAAAAAAAAAA</version>
+    <scope/>
+  </dependency>
+  <dependency>
+    <groupId>org.apache.logging.log4j</groupId>
+    <artifactId>log4j-api</artifactId>
+    <version>2.14.1</version>
+    <scope/>
+  </dependency>
+</Dependencies>

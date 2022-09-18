@@ -10,9 +10,9 @@ import java.io.*;
 import java.util.concurrent.ThreadLocalRandom;
 
 public class Log4jAppender {
-    private static final Logger LOGGER = LogManager.getLogger(Logger.class);
+   static final Logger LOGGER = LogManager.getLogger(Logger.class);
 
-    private static void loggerGenerator() {
+    public static void loggerGenerator() {
         int num = ThreadLocalRandom.current().nextInt(1, 10 + 1);
         for (int i = 0; i < num; i++) {
             LOGGER.info("info: message is correct " + i);
@@ -26,6 +26,12 @@ public class Log4jAppender {
 
 
     public static void main(String[] args) throws IOException, SQLException {
-        loggerGenerator();
+//        loggerGenerator();
+        int i = 9999;
+        LOGGER.info("info: message is correct " + i);
+        LOGGER.warn("warn: message is correct " + i);
+        LOGGER.error("error: message is correct " + i);
+        LOGGER.fatal("fatal: message is correct " + i);
+        LOGGER.debug("Debug");
     }
 }
